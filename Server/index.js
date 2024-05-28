@@ -20,10 +20,7 @@ app.use(express.json());
 
 
 
-// run sever
-app.listen(3000, () => {
-    console.log("Server running on port 3000")
-});
+
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
@@ -34,6 +31,13 @@ app.use((err, req, res, next) => {
     return res.status(statusCode).json({
         success: false,
         statusCode,
-        message,
-    });
+        message
+    })
+})
+
+
+
+// run sever
+app.listen(3000, () => {
+    console.log("Server running on port 3000")
 });
