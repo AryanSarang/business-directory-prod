@@ -7,6 +7,10 @@ import Header from './components/Header';
 import Categories from './pages/Categories';
 import Allbusiness from './pages/Allbusiness';
 import Contact from './pages/Contact';
+import Profile from './pages/Profile';
+import PrivateRoute from './components/PrivateRoute';
+import BusinessConsultancy from './pages/BusinessConsultancy';
+
 
 export default function App() {
   return <BrowserRouter>
@@ -19,6 +23,11 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route path="/allbusiness" element={<Allbusiness />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/businessconsultancy" element={<BusinessConsultancy />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />} />
+      </Route>
+
     </Routes>
   </BrowserRouter>
 }
