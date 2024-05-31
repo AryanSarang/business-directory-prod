@@ -6,6 +6,10 @@ body {
     background-color: rgb(241, 245, 241);
 }
 
-.h-97 {
-    height: 97%;
+.h-95 {
+    height: 95.7%;
+}
+
+.w-50 {
+    width: 12.5rem;
 }

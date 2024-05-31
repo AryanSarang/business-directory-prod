@@ -2,7 +2,7 @@ import { RiMenuUnfold4Line2 } from "react-icons/ri";
 import { FaFire, FaBuilding, FaUser, FaBell, FaNewspaper, FaLayerGroup, FaHome, FaHandshake } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
-
+import DrawerLogo from '../assets/drawerLogo.png';
 
 const Drawer = () => {
     const { currentUser } = useSelector(state => state.user);
@@ -14,15 +14,16 @@ const Drawer = () => {
                 </button>
             </div>
 
-            <div id="drawer-backdrop" className="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-72 dark:bg-gray-800" tabIndex="-1" aria-labelledby="drawer-backdrop-label">
-                <h5 id="drawer-backdrop-label" className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Menu</h5>
+            <div id="drawer-backdrop" className="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white  w-80 dark:bg-gray-800" tabIndex="-1" aria-labelledby="drawer-backdrop-label">
+
+                <img src={DrawerLogo} alt="drawer logo" className="w-40 h-auto" />
                 <button type="button" data-drawer-hide="drawer-backdrop" aria-controls="drawer-backdrop" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
                     <span className="sr-only">Close menu</span>
                 </button>
-                <div className="py-4 overflow-y-auto h-97 flex flex-col justify-between">
+                <div className="py-4 overflow-y-auto h-95 flex flex-col justify-between">
                     <ul className="space-y-2 font-medium">
                         <li>
                             <Link to={"/"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -55,9 +56,18 @@ const Drawer = () => {
                                 </li>
                                 <li>
                                     <Link to={"/"} className="flex items-center w-full p-2 text-gray-900 transition 
-                                    duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View All</Link>
+                                    duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View all categories</Link>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <Link to={"/allbusiness"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                <FaBuilding className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
+                                <span className="flex justify-between w-full">
+                                    <span className=" ms-3 whitespace-nowrap">All business</span>
+                                </span>
+                            </Link>
                         </li>
                         <li>
                             <Link to={"/featured"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
