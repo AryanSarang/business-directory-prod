@@ -54,7 +54,7 @@ const LogIn = () => {
                 <OAuth />
             </form>
             <div className="flex gap-2 mt-5">
-                <p>New to BD? </p>
+                <p className="font-semibold">New to BD? </p>
                 <Link to={"/signup"}>
                     <span className="text-blue-700">Sign up</span>
                 </Link>

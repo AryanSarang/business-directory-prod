@@ -41,7 +41,7 @@ const Navbar = () => {
                             currentUser ?
                                 <li className="relative">
                                     <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center w-full py-2 px-3 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
-                                        <img src={currentUser.avatar} key={avatarKey} alt="profile" className="rounded-full h-7 w-7 object-cover" />
+                                        <img src={currentUser.avatar} key={avatarKey} alt="dashboard" className="rounded-full h-7 w-7 object-cover" />
                                         <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                                         </svg>
@@ -52,13 +52,13 @@ const Navbar = () => {
                                                 <span className="block px-2 pt-1 pb-2 text-black hover:bg-gray-100">@{currentUser.username}</span>
                                             </li>
                                             <li>
-                                                <Link to={"/profile"} className="block px-2 py-1 text-black hover:bg-gray-100">
+                                                <Link to={"/dashboard"} className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">
                                                     Dashboard</Link>
                                             </li>
 
                                         </ul>
 
-                                        <div className="py-1"><Link to={"/login"} className="block px-2 py-1 text-sm text-black hover:bg-gray-100">
+                                        <div className="py-1"><Link to={"/login"} className="block px-2 py-1 text-sm text-black  font-semibold hover:bg-gray-100">
                                             Log out
                                         </Link>  </div>
 

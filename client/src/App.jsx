@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Categories from './pages/Categories';
 import Allbusiness from './pages/Allbusiness';
 import Contact from './pages/Contact';
-import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import BusinessConsultancy from './pages/BusinessConsultancy';
 import Featured from './pages/Featured';
@@ -34,7 +34,7 @@ export default function App() {
       <Route path="/addbusiness" element={<AddBusiness />} />
 
       <Route element={<PrivateRoute />}>
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
 
     </Routes>
