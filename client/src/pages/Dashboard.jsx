@@ -1,7 +1,7 @@
 
 import ConsultDashboard from '../components/Dashboard/ConsultDashboard';
 import ListingDashboard from '../components/Dashboard/ListingDashboard';
-import Profile from '../components/Profile';
+import Profile from '../components/Dashboard/Profile';
 import ReviewDashboard from '../components/Dashboard/ReviewDashboard';
 
 

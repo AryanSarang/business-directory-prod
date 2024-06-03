@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import { FaPen } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import ImageUpload from '../components/ImageUpload';
+import ImageUpload from '../ImageUpload';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { app } from '../firebase';
+import { app } from '../../firebase';
 
 const Profile = () => {
     const { currentUser } = useSelector((state) => state.user);
@@ -15,7 +15,7 @@ const Profile = () => {
     const [file, setFile] = useState(undefined);
     const [fileUploadError, setFileUploadError] = useState(false);
     const [formData, setFormData] = useState({});
-
+    const [showPassword, setShowPassword] = useState(false);
 
     const onDrop = (acceptedFiles) => {
 
@@ -108,6 +108,25 @@ const Profile = () => {
                                 className="input-field self-start w-56 px-0 py-1 ps-2 rounded-md"
                                 placeholder="New Username"
                             />
+
+                        </div>
+                        <div className="flex justify-between items-center mb-3">
+                            <span className='font-semibold'>Password: </span>
+                            <div className='flex flex-col  pt-8'>
+                                <input
+                                    type={
+                                        showPassword ? "text" : "password"
+                                    }
+                                    id='password'
+                                    onChange={handleChange}
+                                    className="input-field self-start w-56 px-0 py-1 ps-2 rounded-md"
+                                    placeholder="new password"
+                                />
+                                <span className='self-start'>
+                                    <input type="checkbox" className='rounded-md focus:ring-offset-0 focus:ring-0' onChange={() =>
+                                        setShowPassword((prev) => !prev)
+                                    } /> show</span>
+                            </div>
                         </div>
                         <div className="flex mt-3 align-middle items-center justify-between">
                             <span className='font-semibold'>Image:</span>
