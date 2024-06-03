@@ -6,6 +6,11 @@ import ImageUpload from '../ImageUpload';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../../firebase';
 
+
+import { useDispatch } from 'react-redux';
+import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/user/userSlice';
+
+
 const Profile = () => {
     const { currentUser } = useSelector((state) => state.user);
     const [isEditing, setIsEditing] = useState(false);
@@ -16,6 +21,8 @@ const Profile = () => {
     const [fileUploadError, setFileUploadError] = useState(false);
     const [formData, setFormData] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    const dispatch = useDispatch();
+
 
     const onDrop = (acceptedFiles) => {
 
@@ -80,11 +87,32 @@ const Profile = () => {
         );
     };
 
-    const handleSave = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('Updating user with:', { formData });
-        // Add your logic to update the user profile here
-        setIsEditing(false);
+
+        try {
+            dispatch(updateUserStart());
+            const res = await fetch(`/api/user/update/${currentUser._id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(updateUserFailure(data.message));
+                return;
+            }
+            dispatch(updateUserSuccess(data));
+            setIsEditing(false);
+
+        } catch (error) {
+            dispatch(updateUserFailure(error.message));
+
+        }
+
     };
 
     return (
@@ -97,7 +125,7 @@ const Profile = () => {
             <img src={isEditing ? newAvatar : currentUser.avatar} alt="profile" className="w-32 h-32 object-cover self-center rounded-full" />
             <div className="flex flex-col">
                 {isEditing ? (
-                    <form className="flex flex-col" onSubmit={handleSave}>
+                    <form className="flex flex-col" onSubmit={handleSubmit}>
                         <div className="flex justify-between items-center mb-3">
                             <span className='font-semibold'>Username: </span>
                             <input
@@ -111,7 +139,7 @@ const Profile = () => {
 
                         </div>
                         <div className="flex justify-between items-center mb-3">
-                            <span className='font-semibold'>Password: </span>
+                            <span className='font-semibold'>password: </span>
                             <div className='flex flex-col  pt-8'>
                                 <input
                                     type={
@@ -156,7 +184,7 @@ const Profile = () => {
                     </>
                 )}
             </div>
-        </div>
+        </div >
     );
 };
 

@@ -19,7 +19,7 @@ export const signup = async (req, res, next) => {
         const { password: pass, ...rest } = newUser._doc;
         res.cookie('access_token', token, { httpOnly: true })
             .status(200)
-            .json("Account created successfully");
+            .json(rest);
     } catch (error) {
         next(error);
     }
