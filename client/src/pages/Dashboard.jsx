@@ -1,17 +1,20 @@
 
+import ConsultDashboard from '../components/Dashboard/ConsultDashboard';
+import ListingDashboard from '../components/Dashboard/ListingDashboard';
 import Profile from '../components/Profile';
+import ReviewDashboard from '../components/Dashboard/ReviewDashboard';
 
 
 const Dashboard = () => {
 
     return (
-        <main className="w-10/12 my-16 mx-auto">
-            <div className="upper flex flex-col-reverse md:flex-row justify-between">
-                <div className="listing w-full md:w-4/12">Listing</div>
-                <div className="consult w-full md:w-4/12">Consultancy</div>
+        <main className="w-10/12 my-16  mx-auto">
+            <div className="upper flex mb-5 gap-5 flex-col-reverse md:flex-row justify-between">
+                <ConsultDashboard />
+                <ListingDashboard />
                 <Profile />
             </div>
-            <div className="review lower">Review</div>
+            <ReviewDashboard />
         </main>
     );
 };
