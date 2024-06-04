@@ -3,9 +3,30 @@ import { FaFire, FaBuilding, FaUser, FaBell, FaNewspaper, FaLayerGroup, FaHome, 
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import DrawerLogo from '../assets/drawerLogo.png';
+import { logOutUserFailure, logOutUserStart, logOutUserSuccess } from "../redux/user/userSlice";
+import { useDispatch } from 'react-redux';
+
 
 const Drawer = () => {
     const { currentUser } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+
+    const handleLogOut = async () => {
+        try {
+            dispatch(logOutUserStart());
+            const response = await fetch('/api/auth/logout');
+            const data = await response.json();
+            if (data.success === false) {
+                dispatch(logOutUserFailure(data.message));
+                return;
+            }
+            dispatch(logOutUserSuccess());
+        } catch (error) {
+            dispatch(logOutUserFailure(data.message));
+        }
+    }
+
     return (
         <>
             <div className="text-center">
@@ -111,7 +132,7 @@ const Drawer = () => {
                     <ul className="space-y-2 font-medium">
                         <li>
                             <Link to={"/dashboard"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                {(currentUser.avatar) ? (<img className="flex-shrink-0 rounded-full w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " src={currentUser.avatar} />)
+                                {(currentUser) ? (<img className="flex-shrink-0 rounded-full w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " src={currentUser.avatar} />)
                                     : (<FaUser className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />)
                                 }
                                 <span className=" ms-3 whitespace-nowrap">Dashboard</span>
@@ -124,7 +145,7 @@ const Drawer = () => {
                                         <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
                                         </svg>
-                                        <span className=" ms-3 whitespace-nowrap">Log out</span>
+                                        <span onClick={handleLogOut} className=" ms-3 whitespace-nowrap">Log out</span>
                                     </Link> :
                                     <Link to={"/"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                         <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">

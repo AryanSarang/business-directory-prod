@@ -8,11 +8,11 @@ import { app } from '../../firebase';
 
 
 import { useDispatch } from 'react-redux';
-import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/user/userSlice';
+import { logOutUserFailure, logOutUserStart, logOutUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/user/userSlice';
 
 
 const Profile = () => {
-    const { currentUser } = useSelector((state) => state.user);
+    const { currentUser, loading, error } = useSelector((state) => state.user);
     const [isEditing, setIsEditing] = useState(false);
     const [droping, setDroping] = useState(false);
     const [newAvatar, setNewAvatar] = useState(currentUser.avatar);
@@ -114,7 +114,20 @@ const Profile = () => {
         }
 
     };
-
+    const handleLogOut = async () => {
+        try {
+            dispatch(logOutUserStart());
+            const response = await fetch('/api/auth/logout');
+            const data = await response.json();
+            if (data.success === false) {
+                dispatch(logOutUserFailure(data.message));
+                return;
+            }
+            dispatch(logOutUserSuccess());
+        } catch (error) {
+            dispatch(logOutUserFailure(data.message));
+        }
+    }
     return (
         <div className="profile w-full md:w-4/12 shadow-md bg-custom-white md:p-11 p-5 rounded-lg flex flex-col gap-4 text-center">
             <span className="ms-auto">
@@ -170,20 +183,21 @@ const Profile = () => {
                         </div>
                         {(uploadPercent !== 0) && <p className='text-gray-500 text-right'>Upload {uploadPercent}%</p>}
                         {fileUploadError && <span className='text-red-500 text-right'>Error in uploading image</span>}
-                        <button type="submit" className="mt-5 ml-auto text-white save-button self-start border-solid border-2 rounded-md bg-slate-700 px-2 py-1">
-                            Update
+                        <button disabled={loading} type="submit" className="mt-5 ml-auto text-white save-button self-start border-solid border-2 rounded-md bg-slate-700 px-2 py-1">
+                            {loading ? "Loading..." : "Update"}
                         </button>
                     </form>
                 ) : (
                     <>
                         <span className="self-start px-1 py-1 font-semibold">Username: @{currentUser.username}</span>
                         <span className="self-start px-1 py-1 text-nowrap  font-semibold">Email: {currentUser.email}</span>
-                        <span className="mt-4 font-medium text-red-700 p-1 px-2 border-2 hover:text-red-400 hover:border-red-400 border-red-500 rounded-md cursor-pointer self-end">
+                        <span onClick={handleLogOut} className="mt-4 font-medium text-red-700 p-1 px-2 border-2 hover:text-red-400 hover:border-red-400 border-red-500 rounded-md cursor-pointer self-end">
                             Log out
                         </span>
                     </>
                 )}
             </div>
+            <p className='text-red-500 text-xs'>{error ? error : ''}</p>
         </div >
     );
 };
