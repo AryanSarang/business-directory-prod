@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --body-background: rgb(226, 220, 233);
+}
+
 body {
-    background-color: rgb(211, 220, 211);
+    background-color: var(--body-background);
 }
 
 .bg-custom-white {
@@ -16,4 +20,28 @@ body {
 
 .w-50 {
     width: 12.5rem;
+}
+
+
+
+/* swiper */
+
+
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.swiperSlides {
+    background-color: var(--body-background);
+}
+
+
+.bannerHeading {
+    line-height: 1.1 !important;
 }

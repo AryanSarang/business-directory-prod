@@ -17,17 +17,17 @@ const Navbar = () => {
 
 
                 <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
+                    <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
                      md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
 
 
-                        <li><Link to={"/categories"} className="block md:hover:text-slate-700 py-2 px-3 rounded md:border-0 
+                        <li className='items-center'><Link to={"/categories"} className="block md:hover:text-slate-700 py-2 px-3 rounded md:border-0 
                             md:p-0 text-black">
                             Categories</Link>
                         </li>
                         <li><Link to={"/allbusiness"} className="block  md:hover:text-slate-700 py-2 px-3  md:border-0 
                             md:p-0 text-black">
-                            All Business</Link>
+                            All Consultant</Link>
                         </li>
                         <li><Link to={"/contact"} className="block  md:hover:text-slate-700 py-2 px-3 md:border-0 
                             md:p-0 text-black">
@@ -35,7 +35,7 @@ const Navbar = () => {
                         </li>
                         <li><Link to={"/businessconsultancy"} className="block py-2 px-3 md:border-0 
                             md:p-0 md:hover:text-slate-700 text-black">
-                            Business Consultancy</Link>
+                            Performance Marketing</Link>
                         </li>
                         {
                             currentUser ?
@@ -66,8 +66,8 @@ const Navbar = () => {
                                 </li>
 
                                 :
-                                <Link to={"/login"}>
-                                    <li className="text-black-700 md:hover:text-slate-700 ">
+                                <Link to={"/login"} className='bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 hover:bg-white'>
+                                    <li className="text-white md:hover:text-slate-700 ">
                                         Log In
                                     </li>
                                 </Link>
