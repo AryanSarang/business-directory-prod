@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-creative';
 import { EffectCreative, Autoplay } from 'swiper/modules';
-import person1 from '../assets/pngegg.png';
+import person1 from '../../assets/pngegg.png';
 import 'swiper/css/autoplay';
 
 const Crousel = () => {
