@@ -2,12 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: local('Gilroy-Bold'), url(./fonts/Gilroy-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: local('Gilroy-Medium'), url(./fonts/Gilroy-Medium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: local('Gilroy-Light'), url(./fonts/Gilroy-Light.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Gilroy-ExtraBold';
+    src: local('ExtraBold'), url(./fonts/Gilroy-ExtraBold.ttf) format('truetype');
+}
+
 :root {
     --body-background: rgb(226, 220, 233);
 }
 
 body {
     background-color: var(--body-background);
+    font-family: 'Gilroy-Medium';
+    scroll-behavior: smooth;
+}
+
+.gilroy-light {
+    font-family: 'Gilroy-Light';
+}
+
+.gilroy-bold {
+    font-family: 'Gilroy-Bold';
+}
+
+.gilroy-extraBold {
+    font-family: 'Gilroy-ExtraBold';
+}
+
+.text-md {
+    font-size: 1.04rem;
+    line-height: 1.7rem
 }
 
 .bg-custom-white {
@@ -22,7 +61,13 @@ body {
     width: 12.5rem;
 }
 
+#header {
+    transition: box-shadow 0.4s ease;
+}
 
+.headerShadow {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 /* swiper */
 
@@ -38,7 +83,7 @@ body {
 }
 
 .swiperSlides {
-    background-color: var(--body-background);
+    background-color: white;
 }
 
 

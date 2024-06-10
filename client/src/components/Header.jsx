@@ -4,12 +4,30 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Drawer from './Drawer';
 import useWindowWidth from '../Miscellaneous/useWindowWidth';
+import { useEffect } from 'react';
 
 
 const Header = () => {
     const windowWidth = useWindowWidth();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 5) {
+                header.classList.add('headerShadow');
+            } else {
+                header.classList.remove('headerShadow');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <header className="bg-slate-200 shadow-md text-center">
+        <header className="bg-white fixed w-full z-10 text-center" id="header">
             <div className="flex h-20 justify-between md:items-center max-w-7xl mx-auto ">
                 <Link to={"/"}>
                     <img src={logo} className="h-16" alt="business directory" />

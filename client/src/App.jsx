@@ -13,6 +13,7 @@ import BusinessConsultancy from './pages/BusinessConsultancy';
 import Featured from './pages/Featured';
 import AddBusiness from './pages/AddBusiness';
 import AlreadyLogin from './components/AlreadyLogin';
+import Footer from './components/Footer';
 
 export default function App() {
   return <BrowserRouter>
@@ -38,5 +39,6 @@ export default function App() {
       </Route>
 
     </Routes>
+    <Footer />
   </BrowserRouter>
 }

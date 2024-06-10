@@ -25,7 +25,7 @@ const Crousel = () => {
                 loop={true}
                 autoplay={{ delay: 3000, disableOnInteraction: true }}
             >
-                <SwiperSlide className='swiperSlides person1slide flex flex-col bg-slate-300 md:px-5'>
+                <SwiperSlide className='swiperSlides person1slide flex flex-col bg-white md:px-5'>
                     <img className=' w-3/4 md:w-4/6' src={person1} />
                     <div className='flex  justify-between align-middle items-center bg-white w-full
                      text-black px-5 py-5 rounded-2xl  m-5 mt-0  shadow-lg'>

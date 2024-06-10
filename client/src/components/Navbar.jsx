@@ -12,8 +12,8 @@ const Navbar = () => {
     }, [currentUser]);
 
     return (
-        <nav className="bg-slate-200 ">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
+        <nav className="bg-white ">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1 gilroy-bold text-md">
 
 
                 <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
@@ -67,7 +67,7 @@ const Navbar = () => {
 
                                 :
                                 <Link to={"/login"} className='bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 hover:bg-white'>
-                                    <li className="text-white md:hover:text-slate-700 ">
+                                    <li className="text-white md:hover:text-slate-700 tracking-wider gilroy-Bold">
                                         Log In
                                     </li>
                                 </Link>
