@@ -6,7 +6,7 @@ const Banner = () => {
 
     return (
         <div className="flex flex-col bg-white md:flex-row w-full justify-between px-4 md:px-32 py-10 md:py-16">
-            <div className="w-full md:w-2/4">
+            <div className="w-full md:w-2/4 mt-5 md:mt-0">
                 <button className="flex items-center tracking-wide justify-between bg-slate-400 gilroy-light
                  text-white border-2 border-slate-400 hover:text-slate-500 hover:bg-white rounded-full w-full md:w-3/5 py-3 px-5 mb-7">
                     <FaChartLine fontSize={25} /><span>Find your <b className='gilroy-bold'>marketing</b> companion</span> <FaLongArrowAltRight fontSize={25} />
@@ -17,15 +17,15 @@ const Banner = () => {
                 <h1 className="text-5xl md:text-7xl gilroy-extraBold bannerHeading">
                     your business <br /> today
                 </h1>
-                <h3 className="text-xl md:text-2xl mt-5">
+                <h3 className="text-xl md:text-2xl mt-10 md:mt-5">
                     Get consultant from industry leading professionals
                     <br />
                     Make an impact in your domain
                 </h3>
-                <div className="flex md:w-5/6 gap-5 py-9">
+                <div className="flex md:w-5/6 gap-5 pt-9 my-6">
                     <button className=" bg-zinc-950 text-white border-2
                      border-zinc-950 hover:text-white hover:bg-zinc-700 hover:border-zinc-700 w-1/2 rounded-md py-3 px-5 mb-7 ">Get a mentor</button>
-                    <a href="#conversions" className=" bg-transparent text-black border-2
+                    <a href="#process" className=" bg-transparent text-black border-2
                      border-black hover:text-white hover:bg-zinc-950 rounded-md w-1/2 py-3 px-5 mb-7 text-center"><button>Check process</button></a>
                 </div>
                 <div className="flex">
@@ -59,7 +59,7 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full md:w-2/4 mt-12 md:mt-0">
+            <div className="w-full md:w-2/4 mt-52 md:mt-0">
                 <Crousel />
             </div>
         </div>

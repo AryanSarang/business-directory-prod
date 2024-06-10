@@ -2,7 +2,7 @@ import CardConversion from "./CardConversion";
 
 const Conversions = () => {
     return (
-        <div className="text-center my-20" id="conversions">
+        <div className="text-center my-20">
             <h1 className="text-3xl  md:text-6xl mb-10 md:mb-20">Consultancy produces significant <b className="gilroy-extraBold">results</b></h1>
             <div className="flex mx-4 md:mx-0 flex-col gap-4 md:gap-7 text-center">
                 <div className="flex flex-wrap md:flex-nowrap gap-3  md:gap-5 text-center items-center justify-center">

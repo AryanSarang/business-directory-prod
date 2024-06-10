@@ -5,9 +5,10 @@ import HowItWorks from "../components/HomePage/HowItWorks";
 
 const Home = () => {
     return (
-        <main className="pt-12">
+        <main className="md:pt-12">
             <Banner />
             <Conversions />
+            <br className="h-1" id="process" />
             <HowItWorks />
         </main>
 

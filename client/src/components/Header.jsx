@@ -27,7 +27,7 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="bg-white fixed w-full z-10 text-center" id="header">
+        <header className="bg-white w-full z-10 md:fixed text-center" id="header">
             <div className="flex h-20 justify-between md:items-center max-w-7xl mx-auto ">
                 <Link to={"/"}>
                     <img src={logo} className="h-16" alt="business directory" />
