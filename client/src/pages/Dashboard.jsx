@@ -8,7 +8,7 @@ import ReviewDashboard from '../components/Dashboard/ReviewDashboard';
 const Dashboard = () => {
 
     return (
-        <main className="w-10/12 my-16  mx-auto">
+        <main className="w-10/12 md:py-40 mx-auto">
             <div className="upper flex mb-5 gap-5 flex-col-reverse md:flex-row justify-between">
                 <ConsultDashboard />
                 <ListingDashboard />

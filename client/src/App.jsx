@@ -11,9 +11,9 @@ import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import BusinessConsultancy from './pages/BusinessConsultancy';
 import Featured from './pages/Featured';
-import AddBusiness from './pages/AddBusiness';
 import AlreadyLogin from './components/AlreadyLogin';
 import Footer from './components/Footer';
+import ApplyConsultant from './pages/ApplyConsultant';
 
 export default function App() {
   return <BrowserRouter>
@@ -32,10 +32,11 @@ export default function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/featured" element={<Featured />} />
       <Route path="/businessconsultancy" element={<BusinessConsultancy />} />
-      <Route path="/addbusiness" element={<AddBusiness />} />
+
 
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/applyconsultant" element={<ApplyConsultant />} />
       </Route>
 
     </Routes>

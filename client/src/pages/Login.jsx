@@ -39,8 +39,8 @@ const LogIn = () => {
     };
     console.log(formData);
     return (
-        <div className="p-3 max-w-lg mx-auto">
-            <h1 className="text-3xl text-center font-semibold my-7">
+        <div className="p-3 max-w-lg mx-auto md:py-40">
+            <h1 className="text-3xl md:text-5xl text-center font-semibold my-7 gilroy-bold">
                 Log In
             </h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -49,7 +49,7 @@ const LogIn = () => {
                 <input type="password" placeholder="Password" className="border p-3 rounded-lg"
                     id="password" onChange={handleChange} />
                 <button disabled={loading} className="bg-slate-700 text-white p-3 uppercase rounded-lg
-                hover:opacity-95 disabled:opacity-80" >
+                hover:opacity-90 disabled:opacity-80" >
                     {loading ? 'Loading...' : 'Log In'}</button>
                 <OAuth />
             </form>

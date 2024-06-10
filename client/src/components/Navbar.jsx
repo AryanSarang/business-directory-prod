@@ -20,11 +20,6 @@ const Navbar = () => {
                     <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
                      md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
 
-
-                        <li className='items-center'><Link to={"/categories"} className="block md:hover:text-slate-700 py-2 px-3 rounded md:border-0 
-                            md:p-0 text-black">
-                            Categories</Link>
-                        </li>
                         <li><Link to={"/allbusiness"} className="block  md:hover:text-slate-700 py-2 px-3  md:border-0 
                             md:p-0 text-black">
                             All Consultant</Link>
@@ -36,6 +31,10 @@ const Navbar = () => {
                         <li><Link to={"/businessconsultancy"} className="block py-2 px-3 md:border-0 
                             md:p-0 md:hover:text-slate-700 text-black">
                             Performance Marketing</Link>
+                        </li>
+                        <li><Link to={"/applyconsultant"} className="block py-2 px-3 md:border-0 
+                            md:p-0 md:hover:text-slate-700 text-black">
+                            Become a consultant</Link>
                         </li>
                         {
                             currentUser ?
@@ -66,11 +65,13 @@ const Navbar = () => {
                                 </li>
 
                                 :
-                                <Link to={"/login"} className='bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 hover:bg-white'>
-                                    <li className="text-white md:hover:text-slate-700 tracking-wider gilroy-Bold">
+
+                                <li className="text-white tracking-wider gilroy-Bold hover:bg-white hover:text-slate-700 bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 ">
+                                    <Link to={"/login"}>
                                         Log In
-                                    </li>
-                                </Link>
+                                    </Link>
+                                </li>
+
 
                         }
 
@@ -78,7 +79,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav >
     )
 };
 
