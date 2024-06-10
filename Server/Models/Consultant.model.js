@@ -27,6 +27,6 @@ const consultantSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-const ConsultantModel = mongoose.model('Consultant', consultantSchema);
+const Consultant = mongoose.model('Consultant', consultantSchema);
 
-export default ConsultantModel;
+export default Consultant;

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { FaUser, FaPhoneAlt, FaStar, FaRupeeSign } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+
 
 const ApplyConsultant = () => {
     const [formData, setFormData] = useState({ specialization: "Performance Marketing" });
@@ -11,7 +13,12 @@ const ApplyConsultant = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
+        try {
+
+        } catch (error) {
+            console.log(error);
+        }
         e.preventDefault();
         console.log(formData);
     }

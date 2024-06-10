@@ -1,6 +1,7 @@
 import User from "../Models/User.model.js";
 import { errorHandler } from "../Utils/error.js";
 import bcryptjs from 'bcryptjs';
+import Consultant from '../Models/Consultant.model.js';
 
 export const test = (req, res) => {
     res.json({
@@ -31,6 +32,33 @@ export const updateUser = async (req, res, next) => {
         const { password, ...rest } = updatedUser._doc;
 
         res.status(200).json(rest);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const applyConsultant = async (req, res, next) => {
+
+    try {
+        const newConsultant = await Consultant({ ...req.body, status: 'pending' })
+        await newConsultant.save()
+        const adminUser = await User.findOne({ isAdmin: true })
+        const notification = adminUser.notification
+        notification.push({
+            type: 'apply-consultant',
+            message: `${newDoctor.name} has applied to become a consultant`,
+            data: {
+                doctorId: newDoctor._id,
+                name: newConsultant.name,
+                onClickPath: '/admin/doctors'
+            }
+        })
+        await userModel.findIdAndUpdate(adminUser._id, { notification });
+
+        res.status(201).send({
+            success: true,
+            message: 'Consultant details will be reviewed'
+        });
     } catch (error) {
         next(error);
     }
