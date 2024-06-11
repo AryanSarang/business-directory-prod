@@ -46,7 +46,7 @@ export const applyConsultant = async (req, res, next) => {
         if (existingConsultant) {
             return res.status(400).send({
                 success: false,
-                message: 'A consultant account is already exists with this email .'
+                message: 'A consultant account already exists with this email.'
             });
         }
         const newConsultant = await Consultant({ ...req.body, status: 'pending' })
@@ -72,3 +72,21 @@ export const applyConsultant = async (req, res, next) => {
         next(error);
     }
 };
+export const getAllNotification = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ _id: req.body.userId });
+        const seenNotification = user.seenNotification;
+        const notification = user.notification;
+        seenNotification.push(...notification);
+        user.notification = [];
+        user.seenNotification = seenNotification;
+        const updatedUser = await user.save();
+        res.status(200).send({
+            success: true,
+            message: 'All notification marked as read',
+            data: updateduser,
+        });
+    } catch (error) {
+        next(error);
+    }
+}

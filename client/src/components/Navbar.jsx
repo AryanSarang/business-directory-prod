@@ -1,15 +1,34 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { logOutUserFailure, logOutUserStart, logOutUserSuccess } from "../redux/user/userSlice";
 
 const Navbar = () => {
     const { currentUser } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
     const [avatarKey, setAvatarKey] = useState(Date.now());
     useEffect(() => {
         if (currentUser) {
             setAvatarKey(Date.now());
         }
     }, [currentUser]);
+
+
+    const handleLogOut = async () => {
+        try {
+            dispatch(logOutUserStart());
+            const response = await fetch('/api/auth/logout');
+            const data = await response.json();
+            if (data.success === false) {
+                dispatch(logOutUserFailure(data.message));
+                return;
+            }
+            dispatch(logOutUserSuccess());
+        } catch (error) {
+            dispatch(logOutUserFailure(data.message));
+        }
+    }
 
     return (
         <nav className="bg-white ">
@@ -24,9 +43,11 @@ const Navbar = () => {
                             md:p-0 text-black">
                             All Consultant</Link>
                         </li>
-                        <li><Link to={"/contact"} className="block  md:hover:text-slate-700 py-2 px-3 md:border-0 
+                        <li><Link to={"/dashboard"} className="block  md:hover:text-slate-700 py-2 px-3 md:border-0 
                             md:p-0 text-black">
-                            Inbox</Link>
+                            <span>Inbox</span>{currentUser && <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-white">{currentUser.notification.length}</span>}
+                        </Link>
+
                         </li>
                         <li><Link to={"/businessconsultancy"} className="block py-2 px-3 md:border-0 
                             md:p-0 md:hover:text-slate-700 text-black">
@@ -57,7 +78,7 @@ const Navbar = () => {
 
                                         </ul>
 
-                                        <div className="py-1"><Link to={"/login"} className="block px-2 py-1 text-sm text-black  font-semibold hover:bg-gray-100">
+                                        <div className="py-1" onClick={handleLogOut}><Link to={"/"} className="block px-2 py-1 text-sm text-black  font-semibold hover:bg-gray-100">
                                             Log out
                                         </Link>  </div>
 
@@ -65,12 +86,12 @@ const Navbar = () => {
                                 </li>
 
                                 :
+                                <Link to={"/login"}>
+                                    <li className="text-white tracking-wider gilroy-Bold hover:bg-white hover:text-slate-700 bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 ">
 
-                                <li className="text-white tracking-wider gilroy-Bold hover:bg-white hover:text-slate-700 bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 ">
-                                    <Link to={"/login"}>
                                         Log In
-                                    </Link>
-                                </li>
+
+                                    </li></Link>
 
 
                         }

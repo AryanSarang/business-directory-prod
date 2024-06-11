@@ -108,12 +108,12 @@ const Drawer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/"} className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group">
+                            <Link to={"/dashboard"} className="flex items-center p-2  rounded-lg text-white hover:bg-gray-700 group">
 
                                 <FaBell className="flex-shrink-0 w-5 h-5 transition duration-75 text-gray-400 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
                                 <span className="flex justify-between w-full">
                                     <span className=" ms-3 whitespace-nowrap">Inbox</span>
-                                    <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-blue-300">3</span>
+                                    {currentUser && <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-blue-300">{currentUser.notification.length}</span>}
                                 </span>
                             </Link>
                         </li>
@@ -141,13 +141,13 @@ const Drawer = () => {
                         <li>
                             {
                                 currentUser ?
-                                    <Link to={"/login"} className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
+                                    <Link to={"/"} className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
                                         <svg className="flex-shrink-0 w-5 h-5  transition duration-75 text-gray-400 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
                                         </svg>
                                         <span onClick={handleLogOut} className=" ms-3 whitespace-nowrap">Log out</span>
                                     </Link> :
-                                    <Link to={"/"} className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
+                                    <Link to={"/login"} className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
                                         <svg className="flex-shrink-0 w-5 h-5  transition duration-75 text-gray-400 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
                                         </svg>

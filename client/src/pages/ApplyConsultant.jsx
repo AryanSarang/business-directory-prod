@@ -55,7 +55,11 @@ const ApplyConsultant = () => {
     return (
         <div className="pb-14 md:py-40 px-4 md:px-32 ">
             <h1 className='text-3xl md:text-5xl text-center font-semibold my-7 md:mb-24'>Become a consultant and <b className='gilroy-extraBold'> start earning</b></h1>
+            {status &&
+                <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
+                    <p className='text-center text-green-500'>{status}</p>
 
+                </div>}
             <form className="md:w-1/2 mx-auto" onSubmit={handleSubmit}>
                 <div className='md:flex justify-between gap-8'>
                     <div className="mb-5 md:w-6/12 ">
@@ -113,10 +117,7 @@ const ApplyConsultant = () => {
                 hover:opacity-90 disabled:opacity-80 tracking-wider">Apply for consulatant</button>
                 <h5 className='my-5 '>After submission, Your details will be reviewed for registering as a consultant</h5>
             </form>
-            <div className='md:w-1/2 mx-auto'>
-                <p className='text-center'>{status}</p>
 
-            </div>
         </div>
     )
 };

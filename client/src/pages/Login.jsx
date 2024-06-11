@@ -37,7 +37,6 @@ const LogIn = () => {
             dispatch(signInFailure(error.message));
         }
     };
-    console.log(formData);
     return (
         <div className="p-3 max-w-lg mx-auto md:py-40">
             <h1 className="text-3xl md:text-5xl text-center font-semibold my-7 gilroy-bold">
