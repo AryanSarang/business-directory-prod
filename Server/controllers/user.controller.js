@@ -46,14 +46,14 @@ export const applyConsultant = async (req, res, next) => {
         const notification = adminUser.notification
         notification.push({
             type: 'apply-consultant',
-            message: `${newDoctor.name} has applied to become a consultant`,
+            message: `${newConsultant.name} has applied to become a consultant`,
             data: {
-                doctorId: newDoctor._id,
+                consultantId: newConsultant._id,
                 name: newConsultant.name,
-                onClickPath: '/admin/doctors'
+                onClickPath: '/admin/consultants'
             }
         })
-        await userModel.findIdAndUpdate(adminUser._id, { notification });
+        await User.findByIdAndUpdate(adminUser._id, { notification });
 
         res.status(201).send({
             success: true,

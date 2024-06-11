@@ -1,10 +1,19 @@
 import { useState } from 'react';
 import { FaUser, FaPhoneAlt, FaStar, FaRupeeSign } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { consulatantFormFailure, consulatantFormStart, consulatantFormSuccess } from '../redux/user/userSlice.js';
 
 const ApplyConsultant = () => {
-    const [formData, setFormData] = useState({ specialization: "Performance Marketing" });
+    const { currentUser, loading, error } = useSelector((state) => state.user);
+    const [formData, setFormData] = useState({
+        specialization: "Performance Marketing",
+        userId: currentUser._id
+    });
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
 
     const handleChange = (e) => {
         setFormData({
@@ -14,13 +23,27 @@ const ApplyConsultant = () => {
     }
 
     const handleSubmit = async (e) => {
-        try {
-
-        } catch (error) {
-            console.log(error);
-        }
         e.preventDefault();
         console.log(formData);
+        try {
+            dispatch(consulatantFormStart());
+            const res = await fetch("/api/user/applyconsultant", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(consulatantFormFailure(data.message));
+                return;
+            }
+            dispatch(consulatantFormSuccess());
+        } catch (error) {
+            dispatch(consulatantFormFailure(error.message));
+            console.log(error);
+        }
     }
 
     return (

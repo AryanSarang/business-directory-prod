@@ -132,7 +132,7 @@ const Drawer = () => {
                     <ul className="space-y-2 font-medium">
                         <li>
                             <Link to={"/dashboard"} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                {(currentUser) ? (<img className="flex-shrink-0 rounded-full w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " src={currentUser.avatar} />)
+                                {(currentUser) ? (<img referrerPolicy="no-referrer" className="flex-shrink-0 rounded-full w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 " src={currentUser.avatar} />)
                                     : (<FaUser className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-gray-900 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />)
                                 }
                                 <span className=" ms-3 whitespace-nowrap">Dashboard</span>
