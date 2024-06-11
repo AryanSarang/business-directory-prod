@@ -38,7 +38,6 @@ export const updateUser = async (req, res, next) => {
 };
 
 export const applyConsultant = async (req, res, next) => {
-
     try {
         const newConsultant = await Consultant({ ...req.body, status: 'pending' })
         await newConsultant.save()
