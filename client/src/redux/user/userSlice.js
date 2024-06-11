@@ -56,6 +56,9 @@ const userSlice = createSlice({
         consulatantFormFailure: (state, action) => {
             state.error = action.payload;
             state.loading = false;
+        },
+        clearError: (state) => {
+            state.error = null;
         }
     }
 });
@@ -70,7 +73,8 @@ export const { signInStart,
     logOutUserSuccess,
     consulatantFormStart,
     consulatantFormFailure,
-    consulatantFormSuccess
+    consulatantFormSuccess,
+    clearError
 } = userSlice.actions;
 
 export default userSlice.reducer;

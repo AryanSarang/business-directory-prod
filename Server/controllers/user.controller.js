@@ -39,6 +39,16 @@ export const updateUser = async (req, res, next) => {
 
 export const applyConsultant = async (req, res, next) => {
     try {
+        const { userId } = req.body;
+
+        // Check if a consultant with the same user ID already exists
+        const existingConsultant = await Consultant.findOne({ userId });
+        if (existingConsultant) {
+            return res.status(400).send({
+                success: false,
+                message: 'A consultant account is already exists with this email .'
+            });
+        }
         const newConsultant = await Consultant({ ...req.body, status: 'pending' })
         await newConsultant.save()
         const adminUser = await User.findOne({ isAdmin: true })

@@ -34,7 +34,7 @@ const Header = () => {
                 </Link>
 
                 <div className='my-auto'>
-                    {windowWidth >= 1000 ? <Navbar /> : <Drawer />}
+                    {windowWidth >= 900 ? <Navbar /> : <Drawer />}
                 </div>
             </div>
         </header>

@@ -2,7 +2,7 @@
 const CardConversion = ({ src, width }) => {
     return (
         <div className={`${width} md:w-auto`}>
-            <img src={src} />
+            <img className="w-full md:w-auto" src={src} />
         </div>
     )
 };

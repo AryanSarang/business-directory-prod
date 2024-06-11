@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser, FaPhoneAlt, FaStar, FaRupeeSign } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { consulatantFormFailure, consulatantFormStart, consulatantFormSuccess } from '../redux/user/userSlice.js';
+import { consulatantFormFailure, consulatantFormStart, consulatantFormSuccess, clearError } from '../redux/user/userSlice.js';
 
 const ApplyConsultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -12,7 +12,11 @@ const ApplyConsultant = () => {
     });
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [status, setStatus] = useState(null);
 
+    useEffect(() => {
+        dispatch(clearError());
+    }, []);
 
 
     const handleChange = (e) => {
@@ -37,12 +41,14 @@ const ApplyConsultant = () => {
             const data = await res.json();
             if (data.success === false) {
                 dispatch(consulatantFormFailure(data.message));
+                setStatus(data.message);
                 return;
             }
             dispatch(consulatantFormSuccess());
+            setStatus("Thank you for applying, we will verify your details and reach out to you.");
         } catch (error) {
             dispatch(consulatantFormFailure(error.message));
-            console.log(error);
+            setStatus(error.message);
         }
     }
 
@@ -107,7 +113,10 @@ const ApplyConsultant = () => {
                 hover:opacity-90 disabled:opacity-80 tracking-wider">Apply for consulatant</button>
                 <h5 className='my-5 '>After submission, Your details will be reviewed for registering as a consultant</h5>
             </form>
+            <div className='md:w-1/2 mx-auto'>
+                <p className='text-center'>{status}</p>
 
+            </div>
         </div>
     )
 };
