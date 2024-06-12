@@ -45,7 +45,7 @@ const Navbar = () => {
                         </li>
                         <li><Link to={"/dashboard"} className="block  md:hover:text-slate-700 py-2 px-3 md:border-0 
                             md:p-0 text-black">
-                            <span>Inbox</span>{currentUser && <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-white">{currentUser.notification.length}</span>}
+                            <span>Inbox</span>{currentUser && currentUser.notification && <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-white">{currentUser.notification.length}</span>}
                         </Link>
 
                         </li>

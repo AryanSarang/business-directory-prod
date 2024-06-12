@@ -190,7 +190,7 @@ const Profile = () => {
                 ) : (
                     <>
                         <span className="self-start px-1 py-1 font-semibold">Username: @{currentUser.username}</span>
-                        <span className="self-start px-1 py-1  font-semibold">Email: {currentUser.email}</span>
+                        <span className="self-start px-1 py-1 font-semibold">Email: {currentUser.email}</span>
                         <span onClick={handleLogOut} className="mt-4 font-medium text-red-700 p-1 px-2 border-2 hover:text-red-400 hover:border-red-400 border-red-500 rounded-md cursor-pointer self-end">
                             Log out
                         </span>

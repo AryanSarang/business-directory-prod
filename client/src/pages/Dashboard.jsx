@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import ConsultDashboard from '../components/Dashboard/ConsultDashboard';
-import Inbox from '../components/Dashboard/Inbox';
+import Notifications from '../components/Dashboard/Notifications';
 import Profile from '../components/Dashboard/Profile';
 import ReviewDashboard from '../components/Dashboard/ReviewDashboard';
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ const Dashboard = () => {
         <main className="w-11/12 py-20 md:py-40 mx-auto">
             <div className="upper flex mb-5 gap-5 flex-col-reverse md:flex-row justify-between">
                 <ConsultDashboard />
-                <Inbox />
+                <Notifications />
                 <Profile />
             </div>
             <ReviewDashboard />

@@ -112,7 +112,7 @@ const Drawer = () => {
 
                                 <FaBell className="flex-shrink-0 w-5 h-5 transition duration-75 text-gray-400 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
                                 <span className="flex justify-between w-full">
-                                    <span className=" ms-3 whitespace-nowrap">Inbox</span>
+                                    <span className=" ms-3 whitespace-nowrap">Notifications</span>
                                     {currentUser && <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium rounded-full bg-blue-900 text-blue-300">{currentUser.notification.length}</span>}
                                 </span>
                             </Link>

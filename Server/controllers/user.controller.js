@@ -60,7 +60,8 @@ export const applyConsultant = async (req, res, next) => {
                 consultantId: newConsultant._id,
                 name: newConsultant.name,
                 onClickPath: '/admin/consultants'
-            }
+            },
+            timestamp: new Date()
         })
         await User.findByIdAndUpdate(adminUser._id, { notification });
 
@@ -75,17 +76,18 @@ export const applyConsultant = async (req, res, next) => {
 export const getAllNotification = async (req, res, next) => {
     try {
         const user = await User.findOne({ _id: req.body.userId });
-        const seenNotification = user.seenNotification;
-        const notification = user.notification;
-        seenNotification.push(...notification);
-        user.notification = [];
-        user.seenNotification = seenNotification;
-        const updatedUser = await user.save();
+        // const seenNotification = user.seenNotification;
+        // const notification = user.notification;
+
         res.status(200).send({
             success: true,
             message: 'All notification marked as read',
-            data: updateduser,
+            data: user,
         });
+        // seenNotification.push(...notification);
+        // user.notification = [];
+        // user.seenNotification = seenNotification;
+        // const updatedUser = await user.save();
     } catch (error) {
         next(error);
     }
