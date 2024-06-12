@@ -14,6 +14,9 @@ import Featured from './pages/Featured';
 import AlreadyLogin from './components/AlreadyLogin';
 import Footer from './components/Footer';
 import ApplyConsultant from './pages/ApplyConsultant';
+import Users from './pages/Admin/Users';
+import Consultants from './pages/Admin/Consultants';
+import AdminRoute from './components/AdminRoute';
 
 export default function App() {
   return <BrowserRouter>
@@ -32,7 +35,10 @@ export default function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/featured" element={<Featured />} />
       <Route path="/businessconsultancy" element={<BusinessConsultancy />} />
-
+      <Route element={<AdminRoute />}>
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/consultants" element={<Consultants />} />
+      </Route>
 
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
