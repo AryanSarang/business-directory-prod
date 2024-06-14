@@ -3,14 +3,39 @@ import { FaFire, FaBuilding, FaUser, FaBell, FaNewspaper, FaAddressCard, FaChart
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import DrawerLogo from '../assets/drawerLogo.png';
-import { logOutUserFailure, logOutUserStart, logOutUserSuccess } from "../redux/user/userSlice";
+import { logOutUserFailure, logOutUserStart, logOutUserSuccess, notificationFailure, notificationStart, notificationSuccess } from "../redux/user/userSlice";
 import { useDispatch } from 'react-redux';
+import { useEffect } from "react";
 
 
 const Drawer = () => {
     const { currentUser } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        const getAllNotifications = async () => {
+            try {
+                dispatch(notificationStart());
+                const res = await fetch(`/api/user/get-all-notification`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId: currentUser._id }),
+                });
+                const data = await res.json();
+                if (data.success === false) {
+                    dispatch(notificationFailure(data.message));
+                    return;
+                }
+                dispatch(notificationSuccess(data.data));
+
+            } catch (error) {
+                dispatch(notificationFailure(error.message));
+            }
+        }
+        getAllNotifications();
+    }, [currentUser])
 
     const handleLogOut = async () => {
         try {

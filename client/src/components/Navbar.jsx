@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { logOutUserFailure, logOutUserStart, logOutUserSuccess } from "../redux/user/userSlice";
+import { clearError, logOutUserFailure, logOutUserStart, logOutUserSuccess, notificationFailure, notificationStart, notificationSuccess } from "../redux/user/userSlice";
 
 const Navbar = () => {
     const { currentUser } = useSelector(state => state.user);
@@ -11,7 +11,30 @@ const Navbar = () => {
     useEffect(() => {
         if (currentUser) {
             setAvatarKey(Date.now());
+            dispatch(clearError());
         }
+        const getAllNotifications = async () => {
+            try {
+                dispatch(notificationStart());
+                const res = await fetch(`/api/user/get-all-notification`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId: currentUser._id }),
+                });
+                const data = await res.json();
+                if (data.success === false) {
+                    dispatch(notificationFailure(data.message));
+                    return;
+                }
+                dispatch(notificationSuccess(data.data));
+
+            } catch (error) {
+                dispatch(notificationFailure(error.message));
+            }
+        }
+        getAllNotifications();
     }, [currentUser]);
 
 
