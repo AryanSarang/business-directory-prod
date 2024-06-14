@@ -135,7 +135,7 @@ const Profile = () => {
                     {isEditing ? "Discard" : <> <FaPen fontSize="12px" /> Edit</>}
                 </button>
             </span>
-            <img referrerPolicy="no-referrer" src={isEditing ? newAvatar : currentUser.avatar} alt="profile" className="w-32 h-32 object-cover self-center rounded-full" />
+            <img referrerPolicy="no-referrer" src={isEditing ? newAvatar : currentUser.avatar} alt="profile" className="w-32 h-32 object-cover self-center shadow-lg rounded-full" />
             <div className="flex flex-col">
                 {isEditing ? (
                     <form className="flex flex-col" onSubmit={handleSubmit}>

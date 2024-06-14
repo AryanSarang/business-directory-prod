@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaUser, FaPhoneAlt, FaStar, FaRupeeSign } from 'react-icons/fa';
+import { FaUser, FaPhoneAlt, FaStar, FaRupeeSign, FaGraduationCap, FaLinkedin } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { consulatantFormFailure, consulatantFormStart, consulatantFormSuccess, clearError } from '../redux/user/userSlice.js';
@@ -8,7 +8,9 @@ const ApplyConsultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
         specialization: "Performance Marketing",
-        userId: currentUser._id
+        userId: currentUser._id,
+        avatar: currentUser.avatar,
+        email: currentUser.email
     });
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -104,6 +106,28 @@ const ApplyConsultant = () => {
                             </div>
                             <input type="number" id="feesPerConsultation" required onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
                          focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="2000" />
+                        </div>
+                    </div>
+                </div>
+                <div className='md:flex justify-between gap-8'>
+                    <div className="mb-5 md:w-6/12 ">
+                        <label htmlFor="experienceYear" className="block mb-2 text-md font-medium text-gray-900 ">Total experience (years)</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <FaGraduationCap />
+                            </div>
+                            <input type="number" id="experienceYear" required onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                         focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="2" />
+                        </div>
+                    </div>
+                    <div className="mb-5 md:w-6/12 ">
+                        <label htmlFor="linkedinUrl" className="block mb-2 text-md font-medium text-gray-900 ">LinkedIn URL</label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <FaLinkedin />
+                            </div>
+                            <input type="text" id="linkedinUrl" required onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                         focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="linkedin.com/" />
                         </div>
                     </div>
                 </div>

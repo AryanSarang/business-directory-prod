@@ -49,8 +49,8 @@ export const applyConsultant = async (req, res, next) => {
                 message: 'A consultant account already exists with this email.'
             });
         }
-        const newConsultant = await Consultant({ ...req.body, status: 'pending' })
-        await newConsultant.save()
+        const newConsultant = await Consultant({ ...req.body })
+        await newConsultant.save();
         const adminUser = await User.findOne({ isAdmin: true })
         const notification = adminUser.notification
         notification.push({
@@ -75,7 +75,7 @@ export const applyConsultant = async (req, res, next) => {
 };
 export const getAllNotification = async (req, res, next) => {
     try {
-        const user = await User.findOne({ _id: req.body.userId });
+        const user = await User.findOne({ _id: req.body.userId }).select("-password");
         // const seenNotification = user.seenNotification;
         // const notification = user.notification;
 

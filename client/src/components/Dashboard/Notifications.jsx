@@ -6,7 +6,11 @@ import { notificationFailure, notificationStart, notificationSuccess } from '../
 const Notifications = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
 
+    const [isExpanded, setIsExpanded] = useState(false);
 
+    const toggleIsExpanded = () => {
+        setIsExpanded(!isExpanded);
+    };
     const dispatch = useDispatch();
     useEffect(() => {
 
@@ -27,7 +31,7 @@ const Notifications = () => {
                     return;
                 }
                 dispatch(notificationSuccess(data.data));
-                console.log(data.data);
+
             } catch (error) {
                 dispatch(notificationFailure(error.message));
             }
@@ -35,20 +39,28 @@ const Notifications = () => {
         getAllNotifications();
     }, []);
     return (
-        <div className="Notifications w-full md:w-4/12 shadow-md bg-custom-white md:p-11 p-5 rounded-lg flex flex-col gap-4 text-center">
-            <h4 className='text-2xl gilroy-bold tracking-wide'>Notifications</h4>
-            {currentUser.notification ?
-                (
-                    currentUser.notification.slice().reverse().map((notificationMsg, index) => (
-                        <CardNotification key={index}
-                            message={notificationMsg.message}
-                            onClickPath={notificationMsg.data.onClickPath}
-                            timeStamp={notificationMsg.timestamp}
-                        />
-                    ))
-                ) : <p>No notifications</p>}
+        <div className=' w-full md:w-4/12 shadow-md bg-custom-white md:p-11 p-5 rounded-lg  text-center'>
+            <div className={`w-full flex flex-col gap-4 ${!isExpanded ? 'notifications' : ''}`}>
+                <h4 className='text-2xl gilroy-bold tracking-wide'>Notifications</h4>
+                {currentUser.notification ?
+                    (
+                        currentUser.notification.slice().reverse().map((notificationMsg, index) => (
+                            <CardNotification key={index}
+                                message={notificationMsg.message}
+                                onClickPath={notificationMsg.data ? notificationMsg.data.onClickPath : undefined}
+                                timeStamp={notificationMsg.timestamp}
+                            />
+                        ))
+                    ) : <p>No notifications</p>}
 
 
+            </div>
+            <button
+                className="text-blue-500 mt-4 text-xs"
+                onClick={toggleIsExpanded}
+            >
+                {isExpanded ? 'Only recent' : 'View All'}
+            </button>
         </div>
     )
 };

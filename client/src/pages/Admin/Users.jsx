@@ -7,7 +7,7 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const dispatch = useDispatch();
     useEffect(() => {
-        // dispatch(clearError());
+        dispatch(clearError());
         const getUsers = async () => {
             try {
                 const token = localStorage.getItem("access_token");
@@ -32,7 +32,7 @@ const Users = () => {
         }
 
         getUsers();
-    }, [])
+    }, []);
     return (
         <div className="py-2 px-2 md:py-52 md:px-20">
 

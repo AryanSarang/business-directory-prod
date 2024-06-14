@@ -29,3 +29,32 @@ export const getAllConsultantsController = async (req, res, next) => {
     }
 
 }
+
+export const consultantApprove = async (req, res, next) => {
+    try {
+        const { consultantId, approved } = req.body;
+        const consultant = await Consultant.findByIdAndUpdate(
+            consultantId,
+            { approved },
+            { new: true }
+        );
+
+        const user = await User.findOne({ _id: consultant.userId });
+        const notification = user.notification;
+        notification.push({
+            type: 'consultant request update',
+            message: `Your request for joining as a consultant has been ${approved === "approved" ? "approved" : "denied, feel free to contact us if you think we made a mistake."}`,
+            timestamp: new Date()
+        });
+        user.isConsultant = approved === "approved";
+        await user.save();
+
+        res.status(201).send({
+            success: true,
+            message: 'Account status updated',
+            data: consultant
+        });
+    } catch (error) {
+        next(error);
+    }
+}

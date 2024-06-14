@@ -91,3 +91,9 @@ body {
 .bannerHeading {
     line-height: 1.1 !important;
 }
+
+.notifications {
+    max-height: 400px;
+    overflow: hidden;
+    padding-bottom: 40px;
+}

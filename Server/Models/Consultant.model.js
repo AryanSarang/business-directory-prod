@@ -24,6 +24,41 @@ const consultantSchema = new mongoose.Schema({
     feesPerConsultation: {
         type: Number,
         required: [true, 'feesPerConsultation is required']
+    },
+    avatar: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    approved: {
+        type: String,
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
+    },
+    badge: {
+        type: String
+    },
+    reviews: {
+        type: Array,
+        default: []
+    },
+    experienceYear: {
+        type: String,
+        required: true
+    },
+    linkedinUrl: {
+        type: String,
+        required: true
+    },
+    ordersNumber: {
+        type: String
+    },
+    tags: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true });
 
