@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
 import CardAllConsultant from "../components/CardAllConsultant";
 import { clearError } from "../redux/user/userSlice";
 
@@ -11,13 +10,8 @@ const AllConsultants = () => {
         dispatch(clearError());
         const getConsultants = async () => {
             try {
-                const token = localStorage.getItem("access_token");
-
-                const res = await fetch("/api/admin/getAllConsultants", {
+                const res = await fetch("/api/auth/allconsultants", {
                     method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
                 });
                 const data = await res.json();
                 console.log(data);
@@ -34,15 +28,14 @@ const AllConsultants = () => {
         getConsultants();
     }, []);
     return (
-        <div className="py-16 md:p-40">
-            <h1 className="text-5xl text-center gilroy-bold mb-9">Consultants List</h1>
+        <main className="py-16 md:p-32">
+            <h1 className="text-3xl md:text-5xl text-center mb-9 font-semibold tracking-wider">Find a mentor, you <b className="gilroy-extraBold">admire</b></h1>
             <div className="flex items-center gap-5 flex-wrap">
                 {consultants.map((consultant, index) => (
                     <CardAllConsultant key={index} consultant={consultant} />
                 ))}
             </div>
-        </div>
-
+        </main>
     )
 };
 

@@ -2,6 +2,7 @@ import User from "../Models/User.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../Utils/error.js";
 import jwt from 'jsonwebtoken';
+import Consultant from "../Models/Consultant.model.js";
 
 export const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
@@ -17,7 +18,7 @@ export const signup = async (req, res, next) => {
 
         const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET)
         const { password: pass, ...rest } = newUser._doc;
-        res.cookie('access_token', token, { httpOnly: true })
+        res.cookie('access_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
             .status(200)
             .json(rest);
     } catch (error) {
@@ -40,7 +41,7 @@ export const login = async (req, res, next) => {
         if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET)
         const { password: pass, ...rest } = validUser._doc;
-        res.cookie('access_token', token, { httpOnly: true })
+        res.cookie('access_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
             .status(200)
             .json(rest);
     }
@@ -55,7 +56,7 @@ export const google = async (req, res, next) => {
         if (user) {
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
             const { password: pass, ...rest } = user._doc;
-            res.cookie('access_token', token, { httpOnly: true })
+            res.cookie('access_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
                 .status(200)
                 .json(rest);
         } else {
@@ -70,7 +71,7 @@ export const google = async (req, res, next) => {
             await newUser.save();
             const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             const { password: pass, ...rest } = newUser._doc;
-            res.cookie('access_token', token, { httpOnly: true })
+            res.cookie('access_token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
                 .status(200)
                 .json(rest);
         }
@@ -86,4 +87,33 @@ export const signOut = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+}
+
+export const getAllConsultants = async (req, res, next) => {
+    try {
+        const consultants = await Consultant.find({});
+        res.status(200).send({
+            success: true,
+            message: 'consultants list',
+            data: consultants
+        })
+    } catch (error) {
+        next(error);
+    }
+
+}
+
+export const getConsultantById = async (req, res, next) => {
+    try {
+        const consultant = await Consultant.findOne({ _id: req.body.consultantId });
+        console.log(consultant);
+        res.status(200).send({
+            success: true,
+            message: 'Single consultant',
+            data: consultant
+        })
+    } catch (error) {
+        next(error);
+    }
+
 }

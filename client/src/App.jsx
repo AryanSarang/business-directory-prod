@@ -17,6 +17,7 @@ import Users from './pages/Admin/Users';
 import Consultants from './pages/Admin/Consultants';
 import AdminRoute from './components/AdminRoute';
 import AllConsultants from './pages/AllConsultants';
+import Consultant from './pages/Consultant';
 
 export default function App() {
   return <BrowserRouter>
@@ -35,6 +36,7 @@ export default function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/featured" element={<Featured />} />
       <Route path="/businessconsultancy" element={<BusinessConsultancy />} />
+      <Route path='/consultant/:consultantId' element={<Consultant />} />
       <Route element={<AdminRoute />}>
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/consultants" element={<Consultants />} />
