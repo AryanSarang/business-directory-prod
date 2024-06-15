@@ -5,7 +5,6 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Header from './components/Header';
 import Categories from './pages/Categories';
-import Allbusiness from './pages/Allbusiness';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
@@ -17,6 +16,7 @@ import ApplyConsultant from './pages/ApplyConsultant';
 import Users from './pages/Admin/Users';
 import Consultants from './pages/Admin/Consultants';
 import AdminRoute from './components/AdminRoute';
+import AllConsultants from './pages/AllConsultants';
 
 export default function App() {
   return <BrowserRouter>
@@ -31,7 +31,7 @@ export default function App() {
       </Route>
 
       <Route path="/about" element={<About />} />
-      <Route path="/allbusiness" element={<Allbusiness />} />
+      <Route path="/allconsultants" element={<AllConsultants />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/featured" element={<Featured />} />
       <Route path="/businessconsultancy" element={<BusinessConsultancy />} />

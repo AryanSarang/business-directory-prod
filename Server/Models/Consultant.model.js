@@ -39,7 +39,8 @@ const consultantSchema = new mongoose.Schema({
         default: 'pending'
     },
     badge: {
-        type: String
+        type: String,
+        default: 'none'
     },
     reviews: {
         type: Array,
@@ -54,7 +55,8 @@ const consultantSchema = new mongoose.Schema({
         required: true
     },
     ordersNumber: {
-        type: String
+        type: String,
+        default: '0'
     },
     tags: {
         type: Array,

@@ -30,7 +30,6 @@ const Consultants = () => {
             }
 
         }
-
         getConsultants();
     }, []);
     return (

@@ -99,7 +99,7 @@ const ApplyConsultant = () => {
                         </div>
                     </div>
                     <div className="mb-5 md:w-6/12 ">
-                        <label htmlFor="feesPerConsultation" className="block mb-2 text-md font-medium text-gray-900 ">Charges per consultation</label>
+                        <label htmlFor="feesPerConsultation" className="block mb-2 text-md font-medium text-gray-900 ">Charges per hour</label>
                         <div className="relative">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                 <FaRupeeSign />

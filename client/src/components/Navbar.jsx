@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { clearError, logOutUserFailure, logOutUserStart, logOutUserSuccess, notificationFailure, notificationStart, notificationSuccess } from "../redux/user/userSlice";
+import {
+    clearError, logOutUserFailure, logOutUserStart,
+    logOutUserSuccess, notificationFailure,
+    notificationStart, notificationSuccess
+} from "../redux/user/userSlice";
 
 const Navbar = () => {
     const { currentUser } = useSelector(state => state.user);
@@ -12,30 +16,34 @@ const Navbar = () => {
         if (currentUser) {
             setAvatarKey(Date.now());
             dispatch(clearError());
-        }
-        const getAllNotifications = async () => {
-            try {
-                dispatch(notificationStart());
-                const res = await fetch(`/api/user/get-all-notification`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userId: currentUser._id }),
-                });
-                const data = await res.json();
-                if (data.success === false) {
-                    dispatch(notificationFailure(data.message));
-                    return;
-                }
-                dispatch(notificationSuccess(data.data));
+            const getAllNotifications = async () => {
+                try {
+                    dispatch(notificationStart());
+                    const res = await fetch(`/api/user/get-all-notification`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId: currentUser._id }),
+                    });
+                    const data = await res.json();
+                    if (data.success === false) {
+                        dispatch(notificationFailure(data.message));
+                        return;
+                    }
+                    dispatch(notificationSuccess(data.data));
 
-            } catch (error) {
-                dispatch(notificationFailure(error.message));
+                } catch (error) {
+                    dispatch(notificationFailure(error.message));
+                }
             }
+            getAllNotifications();
+            const intervalId = setInterval(getAllNotifications, 5000);
+
+            return () => clearInterval(intervalId);
         }
-        getAllNotifications();
-    }, [currentUser]);
+
+    }, [currentUser && currentUser.notification.length]);
 
 
     const handleLogOut = async () => {
@@ -62,7 +70,7 @@ const Navbar = () => {
                     <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
                      md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
 
-                        <li><Link to={"/allbusiness"} className="block  md:hover:text-slate-700 py-2 px-3  md:border-0 
+                        <li><Link to={"/allconsultants"} className="block  md:hover:text-slate-700 py-2 px-3  md:border-0 
                             md:p-0 text-black">
                             All Consultant</Link>
                         </li>
