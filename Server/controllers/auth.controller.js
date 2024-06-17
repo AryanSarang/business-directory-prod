@@ -106,7 +106,7 @@ export const getAllConsultants = async (req, res, next) => {
 export const getConsultantById = async (req, res, next) => {
     try {
         const consultant = await Consultant.findOne({ _id: req.body.consultantId });
-        console.log(consultant);
+
         res.status(200).send({
             success: true,
             message: 'Single consultant',

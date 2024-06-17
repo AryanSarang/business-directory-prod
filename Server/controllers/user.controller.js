@@ -2,6 +2,8 @@ import User from "../Models/User.model.js";
 import { errorHandler } from "../Utils/error.js";
 import bcryptjs from 'bcryptjs';
 import Consultant from '../Models/Consultant.model.js';
+import Appointment from '../Models/Appointments.model.js';
+import { urlencoded } from "express";
 
 export const test = (req, res) => {
     res.json({
@@ -41,7 +43,6 @@ export const applyConsultant = async (req, res, next) => {
     try {
         const { userId } = req.body;
 
-        // Check if a consultant with the same user ID already exists
         const existingConsultant = await Consultant.findOne({ userId });
         if (existingConsultant) {
             return res.status(400).send({
@@ -92,3 +93,26 @@ export const getAllNotification = async (req, res, next) => {
         next(error);
     }
 }
+
+export const bookAppointment = async (req, res, next) => {
+    try {
+        const newAppointment = new Appointment(req.body);
+        await newAppointment.save();
+
+        const consultant = await Consultant.findOne({ _id: req.body.consultantId });
+        const consultantUser = await User.findOne({ _id: consultant.userId });
+        const user = await User.findOne({ _id: req.body.userId })
+        consultantUser.notification.push({
+            type: "New-appointment-request",
+            message: `A new appointment request from ${user.name}`
+        });
+        consultantUser.save();
+        user.notification.push({
+            type: "New-appointment-request",
+            message: `Your appointment with ${consultant.name} has been booked successfully, you will soon recieve a phone call on ${req.body.userPhone}`
+        });
+        user.save();
+    } catch (error) {
+        next(error);
+    }
+};

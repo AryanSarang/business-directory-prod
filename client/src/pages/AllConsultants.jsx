@@ -29,7 +29,7 @@ const AllConsultants = () => {
     }, []);
     return (
         <main className="py-16 md:p-32">
-            <h1 className="text-3xl md:text-5xl text-center mb-9 font-semibold tracking-wider">Find a mentor, you <b className="gilroy-extraBold">admire</b></h1>
+            <h1 className="text-3xl md:text-5xl text-center mb-16 font-semibold tracking-wider">Find a mentor, you <b className="gilroy-extraBold">admire</b></h1>
             <div className="flex items-center gap-5 flex-wrap">
                 {consultants.map((consultant, index) => (
                     <CardAllConsultant key={index} consultant={consultant} />

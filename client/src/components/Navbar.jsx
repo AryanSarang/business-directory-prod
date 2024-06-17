@@ -38,7 +38,7 @@ const Navbar = () => {
                 }
             }
             getAllNotifications();
-            const intervalId = setInterval(getAllNotifications, 5000);
+            const intervalId = setInterval(getAllNotifications, 15000);
 
             return () => clearInterval(intervalId);
         }

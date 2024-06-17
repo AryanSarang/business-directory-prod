@@ -1,5 +1,6 @@
-const flowbite = require("flowbite-react/tailwind");
 
+const flowbite = require("flowbite-react/tailwind");
+const flowbiteReact = require('flowbite-react/tailwind');
 
 export default {
 
@@ -8,10 +9,10 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     'node_modules/flowbite-react/lib/esm/**/*.js',
-    flowbite.content()
+    flowbiteReact.content()
   ],
   theme: {
     extend: {},
   },
-  plugins: [flowbite.plugin()]
+  plugins: [flowbite.plugin(), flowbiteReact.plugin()]
 }

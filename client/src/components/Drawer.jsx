@@ -13,29 +13,34 @@ const Drawer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const getAllNotifications = async () => {
-            try {
-                dispatch(notificationStart());
-                const res = await fetch(`/api/user/get-all-notification`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userId: currentUser._id }),
-                });
-                const data = await res.json();
-                if (data.success === false) {
-                    dispatch(notificationFailure(data.message));
-                    return;
-                }
-                dispatch(notificationSuccess(data.data));
+        if (currentUser) {
+            const getAllNotifications = async () => {
+                try {
+                    dispatch(notificationStart());
+                    const res = await fetch(`/api/user/get-all-notification`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId: currentUser._id }),
+                    });
+                    const data = await res.json();
+                    if (data.success === false) {
+                        dispatch(notificationFailure(data.message));
+                        return;
+                    }
+                    dispatch(notificationSuccess(data.data));
 
-            } catch (error) {
-                dispatch(notificationFailure(error.message));
+                } catch (error) {
+                    dispatch(notificationFailure(error.message));
+                }
             }
+            getAllNotifications();
+            const intervalId = setInterval(getAllNotifications, 15000);
+
+            return () => clearInterval(intervalId);
         }
-        getAllNotifications();
-    }, [currentUser])
+    }, [currentUser && currentUser.notification.length])
 
     const handleLogOut = async () => {
         try {
