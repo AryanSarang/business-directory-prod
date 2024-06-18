@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError } from "../redux/user/userSlice";
+import { clearError, consulatantFormFailure, consulatantFormStart } from "../redux/user/userSlice";
 import { useParams } from 'react-router-dom';
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
@@ -10,9 +10,9 @@ import { registerLicense } from '@syncfusion/ej2-base';
 
 const Consultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
-
     registerLicense('Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCeEx0QXxbf1x0ZFdMYVxbRX5PMyBoS35RckVlWHhecnVVR2heWEB3');
     const dispatch = useDispatch();
+
     const [consultant, setConsultant] = useState([]);
     const { consultantId } = useParams();
     const [formData, setFormData] = useState({
@@ -22,6 +22,7 @@ const Consultant = () => {
         consultantId: consultantId
     });
     const [firstName, setFirstName] = useState("");
+    const [status, setStatus] = useState(null);
 
     const minDate = new Date();
     minDate.setMinutes(0, 0, 0);
@@ -63,17 +64,17 @@ const Consultant = () => {
             ...formData,
             [e.target.id]: e.target.value,
         });
-        console.log(formData)
     }
-    const handleSubmit = async (e) => {
+    const handleBooking = async (e) => {
         e.preventDefault();
         console.log(formData);
         try {
             dispatch(consulatantFormStart());
-            const res = await fetch("/api/user/applyconsultant", {
+            const res = await fetch("/api/user/book-appointment", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(formData),
             });
@@ -84,7 +85,8 @@ const Consultant = () => {
                 return;
             }
             dispatch(consulatantFormSuccess());
-            setStatus("Thank you for applying, we will verify your details and reach out to you.");
+            console.log(data);
+            setStatus("Thank you for booking, we have recieved your appointment and soon we will contact you.");
         } catch (error) {
             dispatch(consulatantFormFailure(error.message));
             setStatus(error.message);
@@ -142,32 +144,32 @@ const Consultant = () => {
 
             <div className="pt-10 md:pt-20 md:px-40">
                 <h4 className="mb-9 text-center  text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">Book an appointment with {firstName}</h4>
-                <form className="md:w-1/2 mx-auto" onSubmit={handleSubmit}>
+                <form className="md:w-1/2 mx-auto" onSubmit={handleBooking}>
                     <div className='md:flex justify-between gap-8'>
 
                         <div className="mb-5 md:w-6/12">
-                            <label htmlFor="phone" className="block mb-2 text-md font-medium text-gray-900">Phone</label>
+                            <label htmlFor="userPhone" className="block mb-2 text-md font-medium text-gray-900">Phone</label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                     <FaPhoneAlt />
                                 </div>
-                                <input type="tel" id="phone" required onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                                <input type="tel" id="userPhone" required onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
                          focus:border-blue-500 block w-full ps-10 p-2.5 " placeholder="9876543210" inputMode="numeric" pattern="[0-9]*" />
                             </div>
                         </div>
                         <div className="mb-5 md:w-6/12 ">
-                            <label htmlFor="datetimepicker" className="block mb-2 text-md font-medium text-gray-900">Date & Time</label>
+                            <label htmlFor="appointmentDate" className="block mb-2 text-md font-medium text-gray-900">Date & Time</label>
                             <div className="relative datetimepickerDiv">
                                 <DateTimePickerComponent required onChange={handleChange} format="dd-MMM-yy HH:mm" min={minDate} max={maxDate}
-                                    placeholder="Select the date and time" id="datetimepicker" />
+                                    placeholder="Select the date and time" id="appointmentDate" />
                             </div>
                         </div>
 
 
                     </div>
                     <div className="mb-5">
-                        <label htmlFor="experience" className="block mb-2 text-md font-medium text-gray-900">Message</label>
-                        <textarea id="experience" onChange={handleChange} minLength={50} rows="4" className="block min-h-28 max-h-52 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
+                        <label htmlFor="userMessage" className="block mb-2 text-md font-medium text-gray-900">Message</label>
+                        <textarea id="userMessage" onChange={handleChange} rows="4" className="block min-h-28 max-h-52 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                      border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder={`Write a message to ${firstName}`}></textarea>
                     </div>
                     <button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg

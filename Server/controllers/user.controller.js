@@ -3,7 +3,8 @@ import { errorHandler } from "../Utils/error.js";
 import bcryptjs from 'bcryptjs';
 import Consultant from '../Models/Consultant.model.js';
 import Appointment from '../Models/Appointments.model.js';
-import { urlencoded } from "express";
+import moment from 'moment-timezone';
+
 
 export const test = (req, res) => {
     res.json({
@@ -97,21 +98,43 @@ export const getAllNotification = async (req, res, next) => {
 export const bookAppointment = async (req, res, next) => {
     try {
         const newAppointment = new Appointment(req.body);
+
         await newAppointment.save();
 
         const consultant = await Consultant.findOne({ _id: req.body.consultantId });
         const consultantUser = await User.findOne({ _id: consultant.userId });
-        const user = await User.findOne({ _id: req.body.userId })
+        const user = await User.findOne({ _id: req.body.userId });
+        const admin = await User.findOne({ isAdmin: true });
+
+        let indianDate = moment(req.body.appointmentDate).tz('Asia/Kolkata').format('llll');
+        console.log(indianDate);
+
         consultantUser.notification.push({
             type: "New-appointment-request",
-            message: `A new appointment request from ${user.name}`
+            message: `A new appointment request from ${user.username} at ${indianDate}`,
+            timestamp: new Date()
         });
         consultantUser.save();
         user.notification.push({
             type: "New-appointment-request",
-            message: `Your appointment with ${consultant.name} has been booked successfully, you will soon recieve a phone call on ${req.body.userPhone}`
+            message: `Your appointment with ${consultant.name} has been booked successfully, you will soon recieve a phone call on ${req.body.userPhone}`,
+            timestamp: new Date()
         });
         user.save();
+        admin.notification.push({
+            type: "New-appointment-request",
+            message: `A new appointment request from @${user.username} for ${consultant.name} at ${indianDate}, user phone: ${req.body.userPhone}`,
+            data: {
+                consultantId: req.body.consultantId,
+                userId: user._id,
+                appointmentDate: req.body.appointmentDate,
+                onClickPath: `/consultant/${req.body.consultantId}`,
+                userPhone: req.body.userPhone
+            },
+            timestamp: new Date()
+
+        });
+        admin.save();
     } catch (error) {
         next(error);
     }

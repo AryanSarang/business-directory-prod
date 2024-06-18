@@ -5,11 +5,15 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ConsultantId: {
+    consultantId: {
         type: String,
         required: true
     },
-    date: {
+    specialization: {
+        type: String,
+        required: true
+    },
+    appointmentDate: {
         type: Date,
         required: true
     },
@@ -18,8 +22,7 @@ const appointmentSchema = new mongoose.Schema({
         required: true
     },
     userMessage: {
-        type: String,
-        required: true
+        type: String
     },
     status: {
         type: String,
