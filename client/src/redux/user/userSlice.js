@@ -72,7 +72,7 @@ const userSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.currentUser = action.payload;
-        },
+        }
 
     }
 });

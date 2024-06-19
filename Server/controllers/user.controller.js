@@ -95,6 +95,20 @@ export const getAllNotification = async (req, res, next) => {
     }
 }
 
+export const getAllConsultantion = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ _id: req.body.userId }).select("-password");
+        res.status(200).send({
+            success: true,
+            message: 'All consultations fetched',
+            data: user.consultation,
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const bookAppointment = async (req, res, next) => {
     try {
         const newAppointment = new Appointment(req.body);
@@ -103,8 +117,8 @@ export const bookAppointment = async (req, res, next) => {
 
         const consultant = await Consultant.findOne({ _id: req.body.consultantId });
         const consultantUser = await User.findOne({ _id: consultant.userId });
-        const user = await User.findOne({ _id: req.body.userId });
-        const admin = await User.findOne({ isAdmin: true });
+        const user = await User.findOne({ _id: req.body.userId }).select("-password");
+        const admin = await User.findOne({ isAdmin: true }).select("-password");
 
         let indianDate = moment(req.body.appointmentDate).tz('Asia/Kolkata').format('llll');
         console.log(indianDate);
@@ -117,10 +131,16 @@ export const bookAppointment = async (req, res, next) => {
         consultantUser.save();
         user.notification.push({
             type: "New-appointment-request",
-            message: `Your appointment with ${consultant.name} has been booked successfully at ${indianDate}, you will soon recieve a phone call on ${req.body.userPhone}`,
+            message: `Your appointment with ${consultant.name} has been booked for ${indianDate}, you will soon recieve a phone call on ${req.body.userPhone}`,
             timestamp: new Date()
         });
         user.save();
+        user.consultation.push({
+            consultant: consultant.name,
+            date: indianDate,
+            status: "requested",
+            timestamp: new Date()
+        })
         admin.notification.push({
             type: "New-appointment-request",
             message: `A new appointment request from @${user.username} for ${consultant.name} at ${indianDate}, user phone: ${req.body.userPhone}`,

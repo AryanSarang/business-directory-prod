@@ -5,11 +5,8 @@ import { notificationFailure, notificationStart, notificationSuccess } from '../
 
 const Notifications = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
-
-
-
-
     const dispatch = useDispatch();
+
     useEffect(() => {
 
         const getAllNotifications = async () => {
@@ -41,7 +38,7 @@ const Notifications = () => {
 
             <div className="w-full flex flex-col gap-4">
                 <h4 className='text-2xl gilroy-bold mb-3 tracking-wide'>Notifications</h4>
-                <div className="w-full flex flex-col gap-6 overflow-scroll overflow-x-hidden  bg-slate-400 notifications">
+                <div className="w-full flex flex-col gap-6 overflow-scroll overflow-x-hidden  bg-gray-200 notifications">
                     {currentUser && currentUser.notification && currentUser.notification.length > 0 ?
                         (
                             currentUser.notification.slice().reverse().map((notificationMsg, index) => (
