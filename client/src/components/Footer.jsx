@@ -8,7 +8,7 @@ const Footer = () => {
             <div className='flex flex-col md:flex-row bg-slate-900 justify-between text-white px-4 py-14 md:px-40 md:py-20'>
                 <div className='mb-6'>
                     <Link to={"/"} >
-                        <img src={longLogo} className="h-auto w-1/2 mb-6" alt="business directory" />
+                        <img src={longLogo} loading="lazy" className="h-auto w-1/2 mb-6" alt="business directory" />
                     </Link>
                     <h5>548 Market St PMB 30073, San Francisco</h5>
                     <h5>cunsultantcomp@gmail.com</h5>

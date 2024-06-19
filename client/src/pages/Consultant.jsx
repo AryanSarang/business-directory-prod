@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, consulatantFormFailure, consulatantFormStart } from "../redux/user/userSlice";
-import { useParams } from 'react-router-dom';
+import { clearError, consulatantFormFailure, consulatantFormStart, consulatantFormSuccess } from "../redux/user/userSlice";
+import { useLocation, useParams } from 'react-router-dom';
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { registerLicense } from '@syncfusion/ej2-base';
-
+import { Helmet } from 'react-helmet';
 
 
 const Consultant = () => {
@@ -18,7 +18,7 @@ const Consultant = () => {
     const [formData, setFormData] = useState({
         formName: "Booking Form",
         specialization: "Performance Marketing",
-        userId: currentUser._id,
+        userId: currentUser ? currentUser._id : "not logged in",
         consultantId: consultantId
     });
     const [firstName, setFirstName] = useState("");
@@ -32,6 +32,13 @@ const Consultant = () => {
     maxDate.setMonth(maxDate.getMonth() + 3);
 
     useEffect(() => {
+
+
+        const appointmentDateInput = document.getElementById('appointmentDate');
+        if (appointmentDateInput) {
+            appointmentDateInput.disabled = true;
+            appointmentDateInput.style.cursor = 'auto';
+        }
         dispatch(clearError());
         const getConsultant = async () => {
             try {
@@ -56,7 +63,7 @@ const Consultant = () => {
             }
         }
         getConsultant();
-    }, []);
+    }, [location]);
 
 
     const handleChange = (e) => {
@@ -67,6 +74,8 @@ const Consultant = () => {
     }
     const handleBooking = async (e) => {
         e.preventDefault();
+
+        dispatch(clearError());
         console.log(formData);
         try {
             dispatch(consulatantFormStart());
@@ -86,7 +95,10 @@ const Consultant = () => {
             }
             dispatch(consulatantFormSuccess());
             console.log(data);
-            setStatus("Thank you for booking, we have recieved your appointment and soon we will contact you.");
+            if (data.success === true) {
+                setStatus("Thank you for booking, we have recieved your appointment and soon we will contact you.");
+
+            }
         } catch (error) {
             dispatch(consulatantFormFailure(error.message));
             setStatus(error.message);
@@ -95,8 +107,8 @@ const Consultant = () => {
 
     return (
         <main className="pb-16">
-            <div className="consultantBanner flex bg-white pt-5 md:pt-32 md:px-40 pb-10 md:pb-20">
-                <div className="w-2/3 pt-9">
+            <div className="consultantBanner min-h-96 flex flex-col-reverse md:flex-row bg-white pt-5 md:pt-32 md:px-40 pb-10 md:pb-20">
+                <div className="w-full md:w-2/3 pt-9 px-4 min-h-96 md:px-0">
                     <h4 className="flex mb-3 gap-1 items-center text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">{consultant.name}
                         <svg className='w-9 h-9' xmlns="http://www.w3.org/2000/svg" id="Layer_1" enableBackground="new 0 0 120 120" height="512" viewBox="0 0 120 120" width="512"><g>
                             <path d="m99.5 52.8-1.9 4.7c-.6 1.6-.6 3.3 0 4.9l1.9 4.7c1.1 2.8.2 6-2.3 7.8l-4.2 2.9c-1.4 1-2.3 2.5-2.7 4.1l-.9 5c-.6 3-3.1 5.2-6.1 5.3l-5.1.2c-1.7.1-3.3.8-4.5 2l-3.5 3.7c-2.1 2.2-5.4 2.7-8 1.2l-4.4-2.6c-1.5-.9-3.2-1.1-4.9-.7l-5 1.2c-2.9.7-6-.7-7.4-3.4l-2.3-4.6c-.8-1.5-2.1-2.7-3.7-3.2l-4.8-1.6c-2.9-1-4.7-3.8-4.4-6.8l.5-5.1c.2-1.7-.3-3.4-1.4-4.7l-3.2-4c-1.9-2.4-1.9-5.7 0-8.1l3.2-4c1.1-1.3 1.6-3 1.4-4.7l-.5-5.1c-.3-3 1.5-5.8 4.4-6.8l4.8-1.6c1.6-.5 2.9-1.7 3.7-3.2l2.3-4.6c1.4-2.7 4.4-4.1 7.4-3.4l5 1.2c1.6.4 3.4.2 4.9-.7l4.4-2.6c2.6-1.5 5.9-1.1 8 1.2l3.5 3.7c1.2 1.2 2.8 2 4.5 2l5.1.2c3 .1 5.6 2.3 6.1 5.3l.9 5c.3 1.7 1.3 3.2 2.7 4.1l4.2 2.9c2.5 2.2 3.5 5.4 2.3 8.2z" fill="#00d566" />
@@ -112,7 +124,7 @@ const Consultant = () => {
                     <h5 className="text-sm text-gray-700 gilroy-bold tracking-wider">Experience: {consultant.experienceYear} year</h5>
                     <h5 className="text-base mt-2 text-slate-900 font-semibold tracking-wider">Rs. {consultant.feesPerConsultation}/hr</h5>
                     <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-widest underline underline-offset-4">ABOUT</h5>
-                    <p className="text-sm text-slate-800 font-semibold tracking-wider leading-7 my-3 pe-20">
+                    <p className="text-sm min-h-32 text-slate-800 font-semibold tracking-wider leading-7 my-3 md:pe-20">
                         {consultant.experience}
                     </p>
                     <h5 className="text-sm text-green-700 gilroy-bold tracking-wider">Successfully consulted: {consultant.ordersNumber} </h5>
@@ -137,14 +149,29 @@ const Consultant = () => {
 
                     </div>
                 </div>
-                <div className="w-1/3 p-5 text-right">
-                    <img src={consultant.avatar} className="w-60 h-60 ms-auto rounded-full" alt={consultant.name} />
+                <div className="md:w-1/3 flex p-5 text-right">
+                    <>
+                        <Helmet>
+                            <link
+                                rel="preload"
+                                as="image"
+                                href={consultant.avatar}
+                            />
+                        </Helmet>
+                        <img src={consultant.avatar} className="w-60 h-60 mx-auto rounded-full" alt={consultant.name} /></>
+                    <h1 className="text-4xl gilroy-bold md:gilroy-extraBold text-slate-300 select-none
+                     text-center md:text-left uppercase tracking-widest writing-vlr">{consultant.badge !== "none" && consultant.badge}</h1>
                 </div>
             </div>
 
-            <div className="pt-10 md:pt-20 md:px-40">
-                <h4 className="mb-9 text-center  text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">Book an appointment with {firstName}</h4>
-                <form className="md:w-1/2 mx-auto" onSubmit={handleBooking}>
+            <div className="pt-10 md:pt-20 px-4 md:px-40">
+                <h4 className="mb-9 text-center text-3xl md:text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">Book an appointment with {firstName}</h4>
+                {status &&
+                    <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
+                        <p className='text-center text-green-500'>{status}</p>
+
+                    </div>}
+                <form className="md:w-1/2 mx-auto" id="bookingForm" onSubmit={handleBooking}>
                     <div className='md:flex justify-between gap-8'>
 
                         <div className="mb-5 md:w-6/12">
@@ -161,19 +188,20 @@ const Consultant = () => {
                             <label htmlFor="appointmentDate" className="block mb-2 text-md font-medium text-gray-900">Date & Time</label>
                             <div className="relative datetimepickerDiv">
                                 <DateTimePickerComponent required onChange={handleChange} format="dd-MMM-yy HH:mm" min={minDate} max={maxDate}
-                                    placeholder="Select the date and time" id="appointmentDate" />
+                                    placeholder="Choose a date and time" id="appointmentDate" />
                             </div>
                         </div>
-
-
                     </div>
                     <div className="mb-5">
                         <label htmlFor="userMessage" className="block mb-2 text-md font-medium text-gray-900">Message</label>
                         <textarea id="userMessage" onChange={handleChange} rows="4" className="block min-h-28 max-h-52 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                      border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder={`Write a message to ${firstName}`}></textarea>
                     </div>
-                    <button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg
-                hover:opacity-90 disabled:opacity-80 tracking-wider">Book appointment</button>
+                    {!currentUser ? (<button className="bg-slate-700 text-white p-2 px-5  rounded-lg
+                hover:opacity-90 disabled:opacity-80 tracking-wider">Log in to book appointment</button>) :
+                        (<button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg
+                hover:opacity-90 disabled:opacity-80 tracking-wider">Book appointment</button>)
+                    }
                     <h5 className='my-5 '></h5>
                 </form>
             </div >

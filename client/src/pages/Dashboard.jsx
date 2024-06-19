@@ -17,12 +17,12 @@ const Dashboard = () => {
 
     return (
         <main className="w-11/12 py-20 md:py-40 mx-auto">
-            <div className="upper flex mb-5 gap-5 flex-col-reverse md:flex-row justify-between">
-                <ConsultDashboard />
+            <div className="upper flex mb-5 gap-5 flex-col md:flex-row justify-between">
                 <Notifications />
+                <ConsultDashboard />
                 <Profile />
             </div>
-            <ReviewDashboard />
+            {/* <ReviewDashboard /> */}
         </main>
     );
 };

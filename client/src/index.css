@@ -71,6 +71,12 @@ body {
     width: 12.5rem;
 }
 
+/* @media(min-width:1000px) { */
+.writing-vlr {
+    writing-mode: vertical-lr;
+}
+
+/* } */
 
 #header {
     transition: box-shadow 0.4s ease;
@@ -102,13 +108,40 @@ body {
     line-height: 1.1 !important;
 }
 
-.notifications {
-    max-height: 400px;
-    overflow: hidden;
-    padding-bottom: 40px;
+#appointmentDate:disabled {
+    color: black !important;
+    -webkit-text-fill-color: black;
 }
 
-/* Ribbon on consultants */
+/* notifications */
+
+.notifications {
+    padding: 10px 5px 10px 10px;
+    box-shadow: inset 0px 7px 5px -5px rgba(119, 118, 118, 0.5);
+    border-radius: 10px;
+    height: 500px;
+}
+
+.notifications::-webkit-scrollbar {
+    width: 5px;
+}
+
+.notifications::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.notifications::-webkit-scrollbar-thumb {
+    background-color: #777980;
+    border-radius: 10px;
+}
+
+.notifications::-webkit-scrollbar-thumb:hover {
+    background-color: #505255;
+}
+
+/* notifications */
+
+
 .ribbon {
     position: absolute;
     left: -5px;

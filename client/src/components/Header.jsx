@@ -30,7 +30,7 @@ const Header = () => {
         <header className="bg-white w-full z-10  md:fixed text-center" id="header">
             <div className="flex h-20 justify-between md:items-center max-w-7xl mx-auto ">
                 <Link to={"/"}>
-                    <img src={logo} className="h-16" alt="business directory" />
+                    <img src={logo} className="h-16 min-w-24" alt="business directory" />
                 </Link>
 
                 <div className='my-auto'>

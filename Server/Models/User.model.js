@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
     seenNotification: {
         type: Array,
         default: []
+    },
+    consultation: {
+        type: Array,
+        default: []
     }
 
 }, { timestamps: true });

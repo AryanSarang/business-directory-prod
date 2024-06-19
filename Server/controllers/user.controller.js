@@ -117,7 +117,7 @@ export const bookAppointment = async (req, res, next) => {
         consultantUser.save();
         user.notification.push({
             type: "New-appointment-request",
-            message: `Your appointment with ${consultant.name} has been booked successfully, you will soon recieve a phone call on ${req.body.userPhone}`,
+            message: `Your appointment with ${consultant.name} has been booked successfully at ${indianDate}, you will soon recieve a phone call on ${req.body.userPhone}`,
             timestamp: new Date()
         });
         user.save();
@@ -135,6 +135,10 @@ export const bookAppointment = async (req, res, next) => {
 
         });
         admin.save();
+        res.status(200).send({
+            success: true,
+            message: 'Appointment booked'
+        });
     } catch (error) {
         next(error);
     }
