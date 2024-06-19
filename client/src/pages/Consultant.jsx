@@ -12,17 +12,20 @@ const Consultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
     registerLicense('Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCeEx0QXxbf1x0ZFdMYVxbRX5PMyBoS35RckVlWHhecnVVR2heWEB3');
     const dispatch = useDispatch();
-
     const [consultant, setConsultant] = useState([]);
     const { consultantId } = useParams();
+    const [consultantName, setConsultantName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [status, setStatus] = useState(null);
     const [formData, setFormData] = useState({
         formName: "Booking Form",
         specialization: "Performance Marketing",
         userId: currentUser ? currentUser._id : "not logged in",
+        userName: currentUser ? currentUser.username : "not logged in",
+        consultantName: "",
         consultantId: consultantId
     });
-    const [firstName, setFirstName] = useState("");
-    const [status, setStatus] = useState(null);
+
 
     const minDate = new Date();
     minDate.setMinutes(0, 0, 0);
@@ -54,7 +57,9 @@ const Consultant = () => {
                 if (data.success) {
                     setConsultant(data.data);
                     const consultantFirstName = data.data.name.split(' ')[0];
-                    setFirstName(consultantFirstName)
+                    setFirstName(consultantFirstName);
+
+                    setConsultantName(data.data.name);
                 } else {
                     console.log(data);
                 }
@@ -63,9 +68,14 @@ const Consultant = () => {
             }
         }
         getConsultant();
-    }, [location]);
+    }, []);
 
-
+    useEffect(() => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            consultantName: consultantName
+        }));
+    }, [consultantName]);
     const handleChange = (e) => {
         setFormData({
             ...formData,

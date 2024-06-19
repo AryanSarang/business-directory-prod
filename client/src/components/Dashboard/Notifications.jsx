@@ -48,7 +48,7 @@ const Notifications = () => {
                                     timeStamp={notificationMsg.timestamp}
                                 />
                             ))
-                        ) : (<p className='text-white m-auto text-xl'>No notifications</p>)}
+                        ) : (<p className='text-slate-800 m-auto text-xl'>No notifications</p>)}
 
                 </div>
             </div>

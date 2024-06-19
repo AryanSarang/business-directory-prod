@@ -60,7 +60,7 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, index) => (
+                        {users.slice().reverse().map((user, index) => (
                             <UserTable key={index} user={user} />
                         ))}
                     </tbody>

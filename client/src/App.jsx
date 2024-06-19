@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import ApplyConsultant from './pages/ApplyConsultant';
 import Users from './pages/Admin/Users';
 import Consultants from './pages/Admin/Consultants';
+import AllConsultations from './pages/Admin/AllConsultations';
 import AdminRoute from './components/AdminRoute';
 import AllConsultants from './pages/AllConsultants';
 import Consultant from './pages/Consultant';
@@ -40,6 +41,7 @@ export default function App() {
       <Route element={<AdminRoute />}>
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/consultants" element={<Consultants />} />
+        <Route path="/admin/consultations" element={<AllConsultations />} />
       </Route>
 
       <Route element={<PrivateRoute />}>

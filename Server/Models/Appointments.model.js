@@ -9,6 +9,14 @@ const appointmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        required: true
+    },
+    consultantName: {
+        type: String,
+        required: true
+    },
     specialization: {
         type: String,
         required: true

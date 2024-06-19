@@ -1,5 +1,6 @@
 import User from "../Models/User.model.js";
 import Consultant from '../Models/Consultant.model.js';
+import Appointment from "../Models/Appointments.model.js";
 
 
 export const getAllUsersController = async (req, res, next) => {
@@ -28,6 +29,19 @@ export const getAllConsultantsController = async (req, res, next) => {
         next(error);
     }
 
+}
+
+export const getAllConsultations = async (req, res, next) => {
+    try {
+        const consultations = await Appointment.find({});
+        res.status(200).send({
+            success: true,
+            message: 'Consultations list',
+            data: consultations
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
 export const consultantApprove = async (req, res, next) => {

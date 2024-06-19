@@ -21,7 +21,7 @@ const Consultations = () => {
                                     date={SingleConsultation.date}
                                 />
                             ))
-                        ) : (<p className='text-white m-auto text-xl'>No consultations</p>)}
+                        ) : (<p className='text-slate-800 m-auto text-xl'>No consultations</p>)}
 
                 </div>
             </div>
