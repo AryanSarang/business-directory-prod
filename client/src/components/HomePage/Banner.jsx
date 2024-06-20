@@ -9,7 +9,7 @@ const Banner = () => {
             <div className="w-full md:w-2/4 mt-5 md:mt-0">
                 <button className="flex items-center tracking-wide justify-between bg-slate-400 gilroy-light
                  text-white border-2 border-slate-400 hover:text-slate-500 hover:bg-white rounded-full w-full md:w-3/5 py-3 px-5 mb-7">
-                    <FaChartLine fontSize={25} /><span>Find your <b className='gilroy-bold'>marketing</b> companion</span> <FaLongArrowAltRight fontSize={25} />
+                    <FaChartLine fontSize={25} /><span><b className='gilroy-bold'>performance marketing</b> trending</span> <FaLongArrowAltRight fontSize={25} />
                 </button>
                 <h1 className="text-5xl md:text-7xl bannerHeading ">
                     Start growing
@@ -59,7 +59,7 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full md:w-2/4 mt-52 md:mt-0">
+            <div className="w-full md:w-2/4 mt-20 md:mt-10">
                 <Crousel />
             </div>
         </div>

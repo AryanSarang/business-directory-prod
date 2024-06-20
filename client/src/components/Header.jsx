@@ -29,8 +29,8 @@ const Header = () => {
     return (
         <header className="bg-white w-full z-10  md:fixed text-center" id="header">
             <div className="flex h-20 justify-between md:items-center max-w-7xl mx-auto ">
-                <Link to={"/"}>
-                    <img src={logo} className="h-16 min-w-24" alt="business directory" />
+                <Link to={"/"} className='p-2'>
+                    <img src={logo} className="h-16 min-w-24 my-auto" alt="business directory" />
                 </Link>
 
                 <div className='my-auto'>

@@ -40,7 +40,7 @@ const Signup = () => {
     };
     console.log(formData);
     return (
-        <div className="p-3 max-w-lg mx-auto md:py-40">
+        <div className="p-3 max-w-lg mx-auto py-20 pb-40 md:py-40">
             <h1 className="text-3xl md:text-5xl text-center font-semibold my-7 gilroy-bold">
                 Sign Up
             </h1>
