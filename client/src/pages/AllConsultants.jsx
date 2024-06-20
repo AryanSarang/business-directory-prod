@@ -14,7 +14,7 @@ const AllConsultants = () => {
                     method: "GET",
                 });
                 const data = await res.json();
-                console.log(data);
+
                 if (data.success) {
                     const approvedConsultants = data.data.filter(consultant => consultant.approved === "approved");
                     setConsultants(approvedConsultants);

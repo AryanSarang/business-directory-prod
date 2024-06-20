@@ -4,7 +4,7 @@ const CardAllConsultant = ({ consultant }) => {
     const navigate = useNavigate();
     return (
         <div className="w-full relative basis-1/1 mx-auto py-5 md:basis-1/3 shrink-0 p-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
-            <div className="ribbon"><span>Popular</span></div>
+            <div className="ribbon"><span>{consultant.badge !== "none" && consultant.badge}</span></div>
             <div className="text-right">
                 <span className="font-semibold">Rs. {consultant.feesPerConsultation}/hour</span>
             </div>

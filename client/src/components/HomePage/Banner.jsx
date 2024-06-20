@@ -23,8 +23,9 @@ const Banner = () => {
                     Make an impact in your domain
                 </h3>
                 <div className="flex md:w-5/6 gap-5 pt-9 my-6">
-                    <button className=" bg-zinc-950 text-white border-2
-                     border-zinc-950 hover:text-white hover:bg-zinc-700 hover:border-zinc-700 w-1/2 rounded-md py-3 px-5 mb-7 ">Get a mentor</button>
+                    <a href="/allconsultants" className="bg-zinc-950 text-center text-white border-2
+                     border-zinc-950 hover:text-white hover:bg-zinc-700 hover:border-zinc-700 w-1/2 rounded-md py-3 px-5 mb-7 ">
+                        <button >Get a mentor</button></a>
                     <a href="#process" className=" bg-transparent text-black border-2
                      border-black hover:text-white hover:bg-zinc-950 rounded-md w-1/2 py-3 px-5 mb-7 text-center"><button>Check process</button></a>
                 </div>
