@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
+import ConsultantPrice from "../components/ConsultantPrice";
 
 const Consultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -218,11 +219,14 @@ const Consultant = () => {
                                 </SwiperSlide>)
                         }
                     </Swiper>
-                </div>
 
+                    <div className="my-9">
+                        <ConsultantPrice consultant={consultant} />
+                    </div>
+                </div>
             </div>
 
-            <div className="pt-10 md:pt-20 px-4 md:px-40">
+            <div className="pt-10 md:pt-20 px-4 md:px-40" id="formDiv">
                 <h4 className="mb-9 text-center text-3xl md:text-4xl font-medium text-gray-900 gilroy-bold tracking-wide">Book an appointment with {firstName}</h4>
                 {status &&
                     <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
