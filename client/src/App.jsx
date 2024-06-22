@@ -19,9 +19,11 @@ import AllConsultations from './pages/Admin/AllConsultations';
 import AdminRoute from './components/AdminRoute';
 import AllConsultants from './pages/AllConsultants';
 import Consultant from './pages/Consultant';
+import ScrollToTop from './Miscellaneous/ScrollToTop';
 
 export default function App() {
   return <BrowserRouter>
+    <ScrollToTop />
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />

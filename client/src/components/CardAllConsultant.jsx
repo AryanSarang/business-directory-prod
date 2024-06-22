@@ -26,7 +26,7 @@ const CardAllConsultant = ({ consultant }) => {
 
                 <div className="flex mt-4 gap-3 md:mt-6">
                     <a onClick={() => navigate(`/consultant/${consultant._id}`)} className="inline-flex items-center px-6 py-2 text-sm tracking-wider cursor-pointer font-medium text-center text-white bg-green-700 rounded-lg hover:shadow-sm hover:shadow-green-300 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">Book</a>
-                    <a onClick={() => navigate(`/consultant/${consultant._id}`)} className="py-2 px-6 ms-2 text-sm tracking-wider font-semibold text-slate-700 focus:outline-none bg-white rounded-lg border hover:shadow-md hover:shadow-gray-300 border-gray-500 hover:bg-gray-100 hover:text-slate-900 focus:z-10 focus:ring-4 focus:ring-gray-100">Profile</a>
+                    <a onClick={() => navigate(`/consultant/${consultant._id}#bookingForm`)} className="py-2 px-6 ms-2 text-sm tracking-wider font-semibold text-slate-700 focus:outline-none bg-white rounded-lg border hover:shadow-md hover:shadow-gray-300 border-gray-500 hover:bg-gray-100 hover:text-slate-900 focus:z-10 focus:ring-4 focus:ring-gray-100">Profile</a>
                 </div>
                 <span className="text-sm text-gray-700 mt-5 px-5 line-clamp-3 font-semibold overflow-hidden gilroy-light" >
                     {consultant.experience}<br />

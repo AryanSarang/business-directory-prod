@@ -61,7 +61,6 @@ const Consultant = () => {
                     body: JSON.stringify({ consultantId }),
                 });
                 const data = await res.json();
-                console.log(data);
                 if (data.success) {
                     setConsultant(data.data);
                     const consultantFirstName = data.data.name.split(' ')[0];
@@ -197,7 +196,7 @@ const Consultant = () => {
                         </button>
                     </p>
                     <div>
-                        <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-wider underline underline-offset-4">Companies worked with</h5>
+                        <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-wider underline underline-offset-4">{firstName} has worked for</h5>
                         <h5 className="font-semibold text-gray-700 mt-1 ms-1">{companiesName}</h5>
                     </div>
                     <Swiper
