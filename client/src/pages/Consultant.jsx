@@ -6,7 +6,10 @@ import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { DateTimePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { registerLicense } from '@syncfusion/ej2-base';
 import { Helmet } from 'react-helmet';
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 const Consultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -17,6 +20,11 @@ const Consultant = () => {
     const [consultantName, setConsultantName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [status, setStatus] = useState(null);
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleIsExpanded = () => {
+        setIsExpanded(!isExpanded);
+    };
     const [formData, setFormData] = useState({
         formName: "Booking Form",
         specialization: "Performance Marketing",
@@ -114,11 +122,54 @@ const Consultant = () => {
             setStatus(error.message);
         }
     }
-
+    var companiesName;
+    if (consultant.companies && consultant.companies.length > 0) {
+        companiesName = consultant.companies.join(", ");
+    }
     return (
         <main className="pb-16">
-            <div className="consultantBanner min-h-96 flex flex-col-reverse md:flex-row bg-white pt-5 md:pt-32 md:px-40 pb-10 md:pb-20">
-                <div className="w-full md:w-2/3 pt-9 px-4 min-h-96 md:px-0">
+            <div className="consultantBanner justify-between min-h-96 flex flex-col md:flex-row bg-white pt-5 md:pt-28 md:px-40  ">
+                <div className="md:w-3/12 py-3 pb-9 text-center bg-gradient-1 rounded-t-full">
+                    <svg className="w-full min-h-8 h-14" viewBox="0 0 300 1" fill="white">
+                        <path id="curve" d="M 20,130 A 110,110 0 0,1 280,130" fill="transparent" />
+                        <text className="text-2xl user-select-none gilroy-bold md:gilroy-bold uppercase tracking-widest">
+                            <textPath href="#curve" startOffset="50%" textAnchor="middle">
+                                {consultant.badge !== "none" && consultant.badge}
+                            </textPath>
+                        </text>
+                    </svg>
+                    <>
+                        <Helmet>
+                            <link
+                                rel="preload"
+                                as="image"
+                                href={consultant.avatar}
+                            />
+                        </Helmet>
+                        <img src={consultant.avatar} className="w-52 h-52 mx-auto shadow-lg rounded-full relative bottom-3" alt={consultant.name} /></>
+                    <div className="flex flex-col mt-2 align-middle text-center">
+                        <div className="flex gap-2 items-center justify-center">
+                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                            </svg>
+                        </div>
+                        <h5 className="text-sm text-black gilroy-bold tracking-wider my-2">Orders: {consultant.ordersNumber} </h5>
+
+                    </div>
+                </div>
+                <div className="w-full md:w-2/3 pt-9 md:py-14 px-4 min-h-96 md:px-0">
                     <h4 className="flex mb-3 gap-1 items-center text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">{consultant.name}
                         <svg className='w-9 h-9' xmlns="http://www.w3.org/2000/svg" id="Layer_1" enableBackground="new 0 0 120 120" height="512" viewBox="0 0 120 120" width="512"><g>
                             <path d="m99.5 52.8-1.9 4.7c-.6 1.6-.6 3.3 0 4.9l1.9 4.7c1.1 2.8.2 6-2.3 7.8l-4.2 2.9c-1.4 1-2.3 2.5-2.7 4.1l-.9 5c-.6 3-3.1 5.2-6.1 5.3l-5.1.2c-1.7.1-3.3.8-4.5 2l-3.5 3.7c-2.1 2.2-5.4 2.7-8 1.2l-4.4-2.6c-1.5-.9-3.2-1.1-4.9-.7l-5 1.2c-2.9.7-6-.7-7.4-3.4l-2.3-4.6c-.8-1.5-2.1-2.7-3.7-3.2l-4.8-1.6c-2.9-1-4.7-3.8-4.4-6.8l.5-5.1c.2-1.7-.3-3.4-1.4-4.7l-3.2-4c-1.9-2.4-1.9-5.7 0-8.1l3.2-4c1.1-1.3 1.6-3 1.4-4.7l-.5-5.1c-.3-3 1.5-5.8 4.4-6.8l4.8-1.6c1.6-.5 2.9-1.7 3.7-3.2l2.3-4.6c1.4-2.7 4.4-4.1 7.4-3.4l5 1.2c1.6.4 3.4.2 4.9-.7l4.4-2.6c2.6-1.5 5.9-1.1 8 1.2l3.5 3.7c1.2 1.2 2.8 2 4.5 2l5.1.2c3 .1 5.6 2.3 6.1 5.3l.9 5c.3 1.7 1.3 3.2 2.7 4.1l4.2 2.9c2.5 2.2 3.5 5.4 2.3 8.2z" fill="#00d566" />
@@ -134,48 +185,46 @@ const Consultant = () => {
                     <h5 className="text-sm text-gray-700 gilroy-bold tracking-wider">Experience: {consultant.experienceYear} year</h5>
                     <h5 className="text-base mt-2 text-slate-900 font-semibold tracking-wider">Rs. {consultant.feesPerConsultation}/hr</h5>
                     <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-widest underline underline-offset-4">ABOUT</h5>
-                    <p className="text-sm min-h-32 text-slate-800 font-semibold tracking-wider leading-7 my-3 md:pe-20">
+                    <p className={`text-sm min-h-16 ms-1 text-slate-800 font-semibold tracking-wider leading-7 mt-3 md:pe-20  ${!isExpanded ? 'line-clamp-3 overflow-hidden' : ''}`}>
                         {consultant.experience}
                     </p>
-                    <h5 className="text-sm text-green-700 gilroy-bold tracking-wider">Successfully consulted: {consultant.ordersNumber} </h5>
-                    <div className="flex flex-col mt-2 align-middle text-center">
-                        <div className="flex gap-2 items-center">
-                            <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                        </div>
-
+                    <p className="md:pe-20 text-right">
+                        <button
+                            className="text-blue-500 text-xs"
+                            onClick={toggleIsExpanded}
+                        >
+                            {isExpanded ? 'View Less' : 'View More'}
+                        </button>
+                    </p>
+                    <div>
+                        <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-wider underline underline-offset-4">Companies worked with</h5>
+                        <h5 className="font-semibold text-gray-700 mt-1 ms-1">{companiesName}</h5>
                     </div>
+                    <Swiper
+                        slidesPerView={3}
+                        spaceBetween={10}
+                        grabCursor={true}
+                        modules={[Autoplay, Pagination]}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        className="mySwiper h-auto w-full md:w-8/12 mt-9 ms-1 "
+                        loop={true}
+                        autoplay={{ delay: 3000, disableOnInteraction: true }}
+                    >
+                        {
+                            consultant.companiesImg && consultant.companiesImg.map((company, index) =>
+                                <SwiperSlide key={index} className='swiperSlides person1slide flex flex-col bg-white '>
+                                    <img className="h-20 w-auto" src={company} alt={index} />
+                                </SwiperSlide>)
+                        }
+                    </Swiper>
                 </div>
-                <div className="md:w-1/3 flex p-5 text-right">
-                    <>
-                        <Helmet>
-                            <link
-                                rel="preload"
-                                as="image"
-                                href={consultant.avatar}
-                            />
-                        </Helmet>
-                        <img src={consultant.avatar} className="w-60 h-60 mx-auto rounded-full" alt={consultant.name} /></>
-                    <h1 className="text-4xl gilroy-bold md:gilroy-extraBold text-slate-300 select-none
-                     text-center md:text-left uppercase tracking-widest writing-vlr">{consultant.badge !== "none" && consultant.badge}</h1>
-                </div>
+
             </div>
 
             <div className="pt-10 md:pt-20 px-4 md:px-40">
-                <h4 className="mb-9 text-center text-3xl md:text-4xl font-medium text-gray-900 gilroy-bold tracking-wider">Book an appointment with {firstName}</h4>
+                <h4 className="mb-9 text-center text-3xl md:text-4xl font-medium text-gray-900 gilroy-bold tracking-wide">Book an appointment with {firstName}</h4>
                 {status &&
                     <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
                         <p className='text-center text-green-500'>{status}</p>

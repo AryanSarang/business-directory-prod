@@ -6,7 +6,7 @@ const CardAllConsultant = ({ consultant }) => {
         <div className="w-full relative basis-1/1 mx-auto py-5 md:basis-1/3 shrink-0 p-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
             <div className="ribbon"><span>{consultant.badge !== "none" && consultant.badge}</span></div>
             <div className="text-right">
-                <span className="font-semibold">Rs. {consultant.feesPerConsultation}/hour</span>
+                <span className="font-semibold bg-gray-200 px-1">Rs. {consultant.feesPerConsultation}/hour</span>
             </div>
             <div className="flex flex-col items-center py-3">
                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={consultant.avatar} alt={consultant.name} />

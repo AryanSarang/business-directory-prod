@@ -61,6 +61,14 @@ const consultantSchema = new mongoose.Schema({
     tags: {
         type: Array,
         default: []
+    },
+    companies: {
+        type: Array,
+        default: []
+    },
+    companiesImg: {
+        type: Array,
+        default: []
     }
 }, { timestamps: true });
 

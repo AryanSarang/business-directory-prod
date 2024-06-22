@@ -37,6 +37,15 @@
     --body-background: rgb(226, 220, 233);
 }
 
+.bg-body {
+    background-color: var(--body-background);
+}
+
+.bg-gradient-1 {
+
+    background: linear-gradient(to bottom, #5f6c87, rgb(226, 220, 233));
+}
+
 body {
     background-color: var(--body-background);
     font-family: 'Gilroy-Medium';
@@ -72,6 +81,7 @@ body {
 .w-50 {
     width: 12.5rem;
 }
+
 
 
 
