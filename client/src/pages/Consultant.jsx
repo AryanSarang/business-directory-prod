@@ -45,6 +45,16 @@ const Consultant = () => {
 
     useEffect(() => {
 
+        const bodyChildren = document.querySelectorAll("body > div");
+
+        bodyChildren.forEach(div => {
+            const style = getComputedStyle(div);
+
+            const backgroundColor = style.backgroundColor;
+            if (backgroundColor === "rgb(238, 242, 255)") {
+                div.style.display = "none";
+            }
+        });
 
         const appointmentDateInput = document.getElementById('appointmentDate');
         if (appointmentDateInput) {
@@ -94,7 +104,6 @@ const Consultant = () => {
         e.preventDefault();
 
         dispatch(clearError());
-        console.log(formData);
         try {
             dispatch(consulatantFormStart());
             const res = await fetch("/api/user/book-appointment", {
@@ -112,7 +121,7 @@ const Consultant = () => {
                 return;
             }
             dispatch(consulatantFormSuccess());
-            console.log(data);
+
             if (data.success === true) {
                 setStatus("Thank you for booking, we have recieved your appointment and soon we will contact you.");
 
@@ -166,7 +175,6 @@ const Consultant = () => {
                             </svg>
                         </div>
                         <h5 className="text-sm text-black gilroy-bold tracking-wider my-2">Orders: {consultant.ordersNumber} </h5>
-
                     </div>
                 </div>
                 <div className="w-full md:w-2/3 pt-9 md:py-14 px-4 min-h-96 md:px-0">

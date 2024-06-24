@@ -7,7 +7,6 @@ import { consulatantFormFailure, consulatantFormStart, consulatantFormSuccess, c
 const ApplyConsultant = () => {
     const { currentUser, loading, error } = useSelector((state) => state.user);
     const [formData, setFormData] = useState({
-        specialization: "Performance Marketing",
         userId: currentUser._id,
         avatar: currentUser.avatar,
         email: currentUser.email
@@ -30,7 +29,6 @@ const ApplyConsultant = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
         try {
             dispatch(consulatantFormStart());
             const res = await fetch("/api/user/applyconsultant", {
@@ -92,9 +90,12 @@ const ApplyConsultant = () => {
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                 <FaStar />
                             </div>
-                            <select id="specialization" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                            <select id="specialization" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                          focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 ">
                                 <option>Performace Marketing</option>
+                                <option>UI UX</option>
+                                <option>Search Engine Optimization</option>
+                                <option>Customer Relationship Management</option>
                             </select>
                         </div>
                     </div>

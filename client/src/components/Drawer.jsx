@@ -102,34 +102,7 @@ const Drawer = () => {
                                 <span className="ms-3">Home</span>
                             </Link>
                         </li>
-                        {/* <li>
-                            <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
 
-                                <FaLayerGroup className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
-                                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
-                                <svg className="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </button>
-                            <ul id="dropdown-example" className="hidden py-2 space-y-2">
-                                <li>
-                                    <Link to={"/"} className="flex items-center w-full p-2 text-gray-900 transition
-                                     duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Health</Link>
-                                </li>
-                                <li>
-                                    <Link to={"/"} className="flex items-center w-full p-2 text-gray-900 transition
-                                     duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Food & Beverages</Link>
-                                </li>
-                                <li>
-                                    <Link to={"/"} className="flex items-center w-full p-2 text-gray-900 transition 
-                                    duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Education</Link>
-                                </li>
-                                <li>
-                                    <Link to={"/"} className="flex items-center w-full p-2 text-gray-900 transition 
-                                    duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">View all categories</Link>
-                                </li>
-                            </ul>
-                        </li> */}
                         <li>
                             <Link to={"/allconsultants"} className="flex items-center p-2 mobileMenuLink rounded-lg text-white hover:bg-gray-700 group">
 
@@ -158,14 +131,32 @@ const Drawer = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/"} className="flex items-center p-2 mobileMenuLink rounded-lg text-white hover:bg-gray-700 group">
+                            <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-slate-700 hover:text-white" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
 
-                                <FaChartBar className="flex-shrink-0 w-5 h-5  transition duration-75 text-gray-400 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
-                                <span className="flex justify-between w-full">
-                                    <span className=" ms-3 whitespace-nowrap">Performance marketing</span>
-                                    <span className="inline-flex items-center justify-center w-3 h-3 p-3 px-5 ms-3 text-sm font-medium   rounded-full bg-blue-900 text-blue-300">new</span>
-                                </span>
-                            </Link>
+                                <FaLayerGroup className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
+                                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
+                                <svg className="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <ul id="dropdown-example" className="hidden py-2 space-y-2">
+                                <li>
+                                    <Link to={"/"} className="flex items-center w-full p-2 text-white transition
+                                     duration-75 rounded-lg pl-11 group hover:bg-slate-700 ">Performance Marketing</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/"} className="flex items-center w-full p-2 text-white transition
+                                     duration-75 rounded-lg pl-11 group hover:bg-slate-700 ">UI UX</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/"} className="flex items-center w-full p-2 text-white transition 
+                                    duration-75 rounded-lg pl-11 group hover:bg-slate-700 ">SEO</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/"} className="flex items-center w-full p-2 text-white transition 
+                                    duration-75 rounded-lg pl-11 group hover:bg-slate-700">CRM</Link>
+                                </li>
+                            </ul>
                         </li>
 
                     </ul>

@@ -15,7 +15,8 @@ const consultantSchema = new mongoose.Schema({
     },
     specialization: {
         type: String,
-        required: [true, 'Specialization is required']
+        required: true,
+        default: "Performance Marketing"
     },
     experience: {
         type: String,

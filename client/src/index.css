@@ -48,7 +48,16 @@
 
 .bg-gradient-2 {
     border: 1px solid rgb(142, 142, 142);
-    background: linear-gradient(to bottom right, #a0a8ba 30%, rgb(226, 220, 233) 70%);
+    background: linear-gradient(to bottom right, #cad3e8 30%, rgb(226, 220, 233) 70%);
+}
+
+.navDropdown1:hover .absolute {
+    opacity: 100;
+    transform: scaleY(1);
+}
+
+.dropdownPopup {
+    right: -40px;
 }
 
 html {

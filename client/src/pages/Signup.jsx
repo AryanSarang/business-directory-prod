@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
+import { clearError, signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
 import OAuth from "../components/OAuth";
 
 const Signup = () => {
@@ -41,7 +41,6 @@ const Signup = () => {
             dispatch(signInFailure(error.message));
         }
     };
-    console.log(formData);
     return (
         <div className="p-3 max-w-lg mx-auto py-20 pb-40 md:py-40">
             <h1 className="text-3xl md:text-5xl text-center font-semibold my-7 gilroy-bold">

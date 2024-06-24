@@ -65,7 +65,6 @@ const Navbar = () => {
         <nav className="bg-white ">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1 gilroy-bold text-md">
 
-
                 <div className="hidden w-full md:block md:w-auto" id="navbar-multi-level">
                     <ul className="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg
                      md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
@@ -80,9 +79,20 @@ const Navbar = () => {
                         </Link>
 
                         </li>
-                        <li><Link to={"/businessconsultancy"} className="block py-2 px-3 md:border-0 
-                            md:p-0 md:hover:text-slate-700 text-black">
-                            Performance Marketing</Link>
+                        <li className="relative navDropdown1">
+                            <button className="text-black flex items-center focus:outline-none hover:text-gray-900">
+                                Categories
+                                <svg className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10 12a1 1 0 0 1-.707-.293l-4-4a1 1 0 0 1 1.414-1.414L10 9.586l3.293-3.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-.707.293z" />
+                                </svg>
+                            </button>
+                            <div className="absolute dropdownPopup right-0 mt-2 w-fit bg-white rounded-md shadow-lg text-sm py-1 opacity-0 transition duration-300 transform scale-y-0 origin-top">
+                                <Link href="#" className="block px-2 py-1 font-semibold text-black hover:bg-gray-100 text-nowrap">Performance Marketing</Link>
+                                <Link href="#" className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">UI UX</Link>
+                                <Link href="#" className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">SEO</Link>
+                                <Link href="#" className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">CRM</Link>
+                            </div>
+
                         </li>
                         <li><Link to={"/applyconsultant"} className="block py-2 px-3 md:border-0 
                             md:p-0 md:hover:text-slate-700 text-black">
@@ -90,28 +100,28 @@ const Navbar = () => {
                         </li>
                         {
                             currentUser ?
-                                <li className="relative">
-                                    <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center w-full py-2 px-3 md:hover:bg-transparent md:border-0 md:hover:text-slate-700 md:p-0 md:w-auto">
+                                <li className="relative navDropdown1">
+                                    <button className="text-black flex items-center focus:outline-none hover:text-gray-900">
                                         <img referrerPolicy="no-referrer" src={currentUser.avatar} key={avatarKey} alt="dashboard" className="rounded-full h-7 w-7 object-cover" />
-                                        <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
+                                        <svg className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 12a1 1 0 0 1-.707-.293l-4-4a1 1 0 0 1 1.414-1.414L10 9.586l3.293-3.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-.707.293z" />
                                         </svg>
                                     </button>
-                                    <div id="dropdownNavbar" className="z-10 hidden font-normal divide-y divide-gray-200 rounded-lg shadow w-36 bg-white">
-                                        <ul className="py-2 text-sm text-black" aria-labelledby="dropdownLargeButton">
-                                            <li>
-                                                <span className="block px-2 pt-1 pb-2 text-black hover:bg-gray-100">@{currentUser.username}</span>
-                                            </li>
-                                            <li>
-                                                <Link to={"/dashboard"} className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">
-                                                    Dashboard</Link>
-                                            </li>
+                                    <div className="absolute dropdownPopup right-0 mt-2 w-fit bg-white rounded-md shadow-lg text-sm py-1 opacity-0 transition duration-300 transform scale-y-0 origin-top">
 
-                                        </ul>
+                                        <a>
+                                            <span className="block px-2 pt-1 pb-2 text-black hover:bg-gray-100">@{currentUser.username}</span>
+                                        </a>
+                                        <Link to={"/dashboard"} className="block px-2 py-1 font-semibold text-black hover:bg-gray-100">
 
-                                        <div className="py-1" onClick={handleLogOut}><Link to={"/"} className="block px-2 py-1 text-sm text-black  font-semibold hover:bg-gray-100">
-                                            Log out
-                                        </Link>  </div>
+                                            Dashboard
+                                        </Link>
+
+                                        <div className="py-1" onClick={handleLogOut}>
+                                            <Link to={"/"} className="block px-2 py-1 text-sm text-black  font-semibold hover:bg-gray-100">
+                                                Log out
+                                            </Link>
+                                        </div>
 
                                     </div>
                                 </li>
@@ -119,17 +129,14 @@ const Navbar = () => {
                                 :
                                 <Link to={"/login"}>
                                     <li className="text-white tracking-wider gilroy-Bold hover:bg-white hover:text-slate-700 bg-slate-500 border-2 rounded-md border-slate-500 w-24 p-2 ">
-
                                         Log In
-
                                     </li></Link>
-
-
                         }
-
-
                     </ul>
+
                 </div>
+
+
             </div>
         </nav >
     )
