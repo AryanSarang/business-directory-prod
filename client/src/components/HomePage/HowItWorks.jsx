@@ -1,5 +1,6 @@
 import Accordion from "./Accordion";
 import ProcessImage from '../../assets/process.png';
+import Accordion2 from "./Accordion2";
 
 const HowItWorks = () => {
     return (
@@ -9,7 +10,7 @@ const HowItWorks = () => {
                 <div className="md:w-1/2 p-10 pt-0">
                     <img src={ProcessImage} alt="consulting process" className="rounded-lg" />
                 </div>
-                <Accordion />
+                <Accordion2 />
             </div>
         </div>
     )
