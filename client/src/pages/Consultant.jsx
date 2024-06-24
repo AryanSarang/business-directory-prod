@@ -129,8 +129,8 @@ const Consultant = () => {
     return (
         <main className="pb-16">
             <div className="consultantBanner justify-between min-h-96 flex flex-col md:flex-row bg-white pt-5 md:pt-28 md:px-40  ">
-                <div className="md:w-3/12 py-3 pb-9 text-center bg-gradient-1 rounded-t-full">
-                    <svg className="w-full min-h-8 h-14" viewBox="0 0 300 1" fill="white">
+                <div className="md:w-3/12 py-3 pb-9 text-center rounded-t-full md:sticky md:top-20  md:h-96">
+                    <svg className="w-full min-h-8 h-20 md:h-14 select-none" viewBox="0 0 300 1" fill="#8a8a8a">
                         <path id="curve" d="M 20,130 A 110,110 0 0,1 280,130" fill="transparent" />
                         <text className="text-2xl user-select-none gilroy-bold md:gilroy-bold uppercase tracking-widest">
                             <textPath href="#curve" startOffset="50%" textAnchor="middle">
@@ -149,19 +149,19 @@ const Consultant = () => {
                         <img src={consultant.avatar} className="w-52 h-52 mx-auto shadow-lg rounded-full relative bottom-3" alt={consultant.name} /></>
                     <div className="flex flex-col mt-2 align-middle text-center">
                         <div className="flex gap-2 items-center justify-center">
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <svg className="w-4 h-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <svg className="w-4 h-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <svg className="w-4 h-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <svg className="w-4 h-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
-                            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                            <svg className="w-4 h-4 text-slate-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
                                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
                             </svg>
                         </div>
@@ -183,7 +183,6 @@ const Consultant = () => {
                     <h5 className="text-sm text-gray-700 gilroy-bold tracking-wider">{consultant.specialization}</h5>
 
                     <h5 className="text-sm text-gray-700 gilroy-bold tracking-wider">Experience: {consultant.experienceYear} year</h5>
-                    <h5 className="text-base mt-2 text-slate-900 font-semibold tracking-wider">Rs. {consultant.feesPerConsultation}/hr</h5>
                     <h5 className="text-base text-slate-900 gilroy-bold mt-5 tracking-widest underline underline-offset-4">ABOUT</h5>
                     <p className={`text-sm min-h-16 ms-1 text-slate-800 font-semibold tracking-wider leading-7 mt-3 md:pe-20  ${!isExpanded ? 'line-clamp-3 overflow-hidden' : ''}`}>
                         {consultant.experience}
@@ -259,13 +258,17 @@ const Consultant = () => {
                         <textarea id="userMessage" onChange={handleChange} rows="4" className="block min-h-28 max-h-52 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                      border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder={`Write a message to ${firstName}`}></textarea>
                     </div>
-                    {!currentUser ? (<button className="bg-slate-700 text-white p-2 px-5  rounded-lg
-                hover:opacity-90 disabled:opacity-80 tracking-wider">Log in to book appointment</button>) :
-                        (<button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg
-                hover:opacity-90 disabled:opacity-80 tracking-wider">Book appointment</button>)
-                    }
+                    {currentUser && (<button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg
+                hover:opacity-90 disabled:opacity-80 tracking-wider">Book appointment</button>)}
+
                     <h5 className='my-5 '></h5>
                 </form>
+                <div className="md:w-1/2 mx-auto">
+                    {!currentUser && (<a href="/login"><button className="bg-slate-700 text-white p-2 px-5  rounded-lg
+                hover:opacity-90 disabled:opacity-80 tracking-wider">Log in to book appointment</button></a>)
+                    }
+                </div>
+
             </div >
 
         </main >

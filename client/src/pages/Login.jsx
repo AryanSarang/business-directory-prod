@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
+import { clearError, signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
 import OAuth from "../components/OAuth";
 
 const LogIn = () => {
@@ -9,6 +9,9 @@ const LogIn = () => {
     const { loading, error } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(clearError());
+    }, []);
     const handleChange = (e) => {
         setFormData({
             ...formData,

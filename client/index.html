@@ -16,6 +16,22 @@
   <script type="module" src="/src/main.jsx"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(() => {
+        const bodyChildren = document.querySelectorAll("body > div");
+
+        bodyChildren.forEach(div => {
+          const style = getComputedStyle(div);
+          const backgroundColor = style.backgroundColor;
+
+          if (backgroundColor === "rgb(238, 242, 255)") {
+            div.classList.add("hidden");
+          }
+        });
+      }, 100);
+    });
+  </script>
 </body>
 
 </html>

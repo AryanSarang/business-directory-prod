@@ -9,7 +9,7 @@ const ConsultantPrice = ({ consultant }) => {
                     <span className="text-sm gilroy-bold">1 hour</span>
                     <span className="text-sm gilroy-bold">Video meeting</span>
                 </div>
-                <span className="text-sm font-bold bg-white rounded-lg my-auto p-2 align-middle shadow-lg"><a href="#formDiv">Rs. {consultant.feesPerConsultation}</a></span>
+                <span className="text-sm font-bold bg-white rounded-lg my-auto p-2 border-2 border-solid border-slate-400 align-middle shadow-lg"><a href="#formDiv">Rs. {consultant.feesPerConsultation}</a></span>
             </div>
 
         </div>

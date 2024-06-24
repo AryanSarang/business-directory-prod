@@ -47,8 +47,8 @@
 }
 
 .bg-gradient-2 {
-
-    background: linear-gradient(to bottom right, #5f6c87, rgb(226, 220, 233));
+    border: 1px solid rgb(142, 142, 142);
+    background: linear-gradient(to bottom right, #a0a8ba 30%, rgb(226, 220, 233) 70%);
 }
 
 html {
