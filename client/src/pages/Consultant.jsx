@@ -120,11 +120,11 @@ const Consultant = () => {
                 setStatus(data.message);
                 return;
             }
-            dispatch(consulatantFormSuccess());
+
 
             if (data.success === true) {
                 setStatus("Thank you for booking, we have recieved your appointment and soon we will contact you.");
-
+                dispatch(consulatantFormSuccess());
             }
         } catch (error) {
             dispatch(consulatantFormFailure(error.message));
@@ -235,11 +235,7 @@ const Consultant = () => {
 
             <div className="pt-10 md:pt-20 px-4 md:px-40" id="formDiv">
                 <h4 className="mb-9 text-center text-3xl md:text-4xl font-medium text-gray-900 gilroy-bold tracking-wide">Book an appointment with {firstName}</h4>
-                {status &&
-                    <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
-                        <p className='text-center text-green-500'>{status}</p>
 
-                    </div>}
                 <form className="md:w-1/2 mx-auto" id="bookingForm" onSubmit={handleBooking}>
                     <div className='md:flex justify-between gap-8'>
 
@@ -266,6 +262,11 @@ const Consultant = () => {
                         <textarea id="userMessage" onChange={handleChange} rows="4" className="block min-h-28 max-h-52 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
                      border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder={`Write a message to ${firstName}`}></textarea>
                     </div>
+                    {status &&
+                        <div className='md:w-1/2 mx-auto mb-9 bg-white py-3 px-4 md:px-1 rounded-lg'>
+                            <p className='text-center text-green-500'>{status}</p>
+
+                        </div>}
                     {currentUser && (<button type="submit" className="bg-slate-700 text-white p-2 px-5  rounded-lg
                 hover:opacity-90 disabled:opacity-80 tracking-wider">Book appointment</button>)}
 

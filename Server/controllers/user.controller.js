@@ -4,7 +4,17 @@ import bcryptjs from 'bcryptjs';
 import Consultant from '../Models/Consultant.model.js';
 import Appointment from '../Models/Appointments.model.js';
 import moment from 'moment-timezone';
+import dotenv from 'dotenv';
+dotenv.config();
+import nodemailer from 'nodemailer';
 
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 export const test = (req, res) => {
     res.json({
@@ -67,6 +77,113 @@ export const applyConsultant = async (req, res, next) => {
         })
         await User.findByIdAndUpdate(adminUser._id, { notification });
 
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: newConsultant.email,
+            subject: 'Applied for Consultant',
+            html: `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <img src="https://scontent.fjai2-4.fna.fbcdn.net/v/t39.30808-6/326199203_853842605872148_2610728013556829022_n.png?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=36QVIa-pDYIQ7kNvgE0NulF&_nc_ht=scontent.fjai2-4.fna&oh=00_AYDTzG_Up7HcgSrGJPiawTrv3HUpmWfl2Q70Rfq_tVE6hA&oe=6680292C"
+                        alt="Company Logo" style="max-width: 150px; height: auto;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <p>Hi ${newConsultant.name},</p>
+                        <p>Your application for becoming a consultant is recieved with following details:</p>
+                        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Name</th>
+                                <td>${newConsultant.name}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Category</th>
+                                <td>${newConsultant.specialization}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Experience</th>
+                                <td>${newConsultant.experience}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Years of experience</th>
+                                <td>${newConsultant.experienceYear}</td>
+                            </tr>
+                              <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Your linkedIn URL</th>
+                                <td>${newConsultant.linkedinUrl}</td>
+                            </tr>
+                             <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Fees</th>
+                                <td>${newConsultant.feesPerConsultation}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Phone</th>
+                                <td>${newConsultant.phone}</td>
+                            </tr>
+                        </table>
+                        <p>Your details are being verified, you will soon recieve a confirmation mail from us.</p>
+                        <p>Best regards,<br>Your Company</p>
+                    </div>
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <p style="font-size: 12px; color: #777;">&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+                    </div>
+                </div>
+            `
+        };
+        await transporter.sendMail(mailOptions);
+
+        const mailOptions2 = {
+            from: process.env.EMAIL_USER,
+            to: adminUser.email,
+            subject: 'Applied for Consultant',
+            html: `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <img src="https://scontent.fjai2-4.fna.fbcdn.net/v/t39.30808-6/326199203_853842605872148_2610728013556829022_n.png?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=36QVIa-pDYIQ7kNvgE0NulF&_nc_ht=scontent.fjai2-4.fna&oh=00_AYDTzG_Up7HcgSrGJPiawTrv3HUpmWfl2Q70Rfq_tVE6hA&oe=6680292C"
+                        alt="Company Logo" style="max-width: 150px; height: auto;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <p>Hi admin,</p>
+                        <p>Your application for becoming a consultant is recieved with following details:</p>
+                        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Name</th>
+                                <td>${newConsultant.name}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Category</th>
+                                <td>${newConsultant.specialization}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Experience</th>
+                                <td>${newConsultant.experience}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Years of experience</th>
+                                <td>${newConsultant.experienceYear}</td>
+                            </tr>
+                              <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Your linkedIn URL</th>
+                                <td>${newConsultant.linkedinUrl}</td>
+                            </tr>
+                             <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Fees</th>
+                                <td>${newConsultant.feesPerConsultation}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Phone</th>
+                                <td>${newConsultant.phone}</td>
+                            </tr>
+                        </table>
+                        <p>Your details are being verified, you will soon recieve a confirmation mail from us.</p>
+                        <p>Best regards,<br>Your Company</p>
+                    </div>
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <p style="font-size: 12px; color: #777;">&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+                    </div>
+                </div>
+            `
+        };
+        await transporter.sendMail(mailOptions2);
         res.status(201).send({
             success: true,
             message: 'Consultant details will be reviewed'
@@ -155,6 +272,47 @@ export const bookAppointment = async (req, res, next) => {
 
         });
         admin.save();
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: user.email,
+            subject: 'Consultation appointment booked',
+            html: `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <img src="https://scontent.fjai2-4.fna.fbcdn.net/v/t39.30808-6/326199203_853842605872148_2610728013556829022_n.png?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=36QVIa-pDYIQ7kNvgE0NulF&_nc_ht=scontent.fjai2-4.fna&oh=00_AYDTzG_Up7HcgSrGJPiawTrv3HUpmWfl2Q70Rfq_tVE6hA&oe=6680292C"
+                        alt="Company Logo" style="max-width: 150px; height: auto;">
+                    </div>
+                    <div style="padding: 20px;">
+                        <p>Hi</p>
+                        <p>Your appointment for ${req.body.specialization} consultation is booked with the following details:</p>
+                        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Consultant</th>
+                                <td>${consultant.name}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Category</th>
+                                <td>${req.body.specialization}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Date & time</th>
+                                <td>${indianDate}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f7f7f7; text-align: left;">Phone</th>
+                                <td>${req.body.userPhone}</td>
+                            </tr>
+                        </table>
+                        <p>You will soon receive a phone call on ${req.body.userPhone}.</p>
+                        <p>Best regards,<br>Your Company</p>
+                    </div>
+                    <div style="background-color: #f7f7f7; padding: 10px 20px; text-align: center;">
+                        <p style="font-size: 12px; color: #777;">&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+                    </div>
+                </div>
+            `
+        };
+        await transporter.sendMail(mailOptions);
         res.status(200).send({
             success: true,
             message: 'Appointment booked'
