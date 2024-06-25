@@ -125,13 +125,13 @@ export const bookAppointment = async (req, res, next) => {
 
         consultantUser.notification.push({
             type: "New-appointment-request",
-            message: `A new appointment request from ${user.username} at ${indianDate}`,
+            message: `A new ${req.body.specialization} appointment request from ${user.username} at ${indianDate}`,
             timestamp: new Date()
         });
         consultantUser.save();
         user.notification.push({
             type: "New-appointment-request",
-            message: `Your appointment with ${consultant.name} has been booked for ${indianDate}, you will soon recieve a phone call on ${req.body.userPhone}`,
+            message: `Your appointment for ${req.body.specialization} with ${consultant.name} has been booked for ${indianDate}, you will soon recieve a phone call on ${req.body.userPhone}`,
             timestamp: new Date()
         });
         user.save();
@@ -143,7 +143,7 @@ export const bookAppointment = async (req, res, next) => {
         })
         admin.notification.push({
             type: "New-appointment-request",
-            message: `A new appointment request from @${user.username} for ${consultant.name} at ${indianDate}, user phone: ${req.body.userPhone}`,
+            message: `A new  ${req.body.specialization} appointment request from @${user.username} for ${consultant.name} at ${indianDate}, user phone: ${req.body.userPhone}`,
             data: {
                 consultantId: req.body.consultantId,
                 userId: user._id,

@@ -10,7 +10,7 @@ const AccordionItem = ({ title, children, isOpen, onClick }) => {
             >
                 <span className="text-lg font-semibold">{title}</span>
                 <svg
-                    className={`h-4 w-4 ml-2 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`}
+                    className={`h-4 w-4 ml-2 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`}
                     viewBox="0 0 20 20"
                     fill="currentColor"
                 >
@@ -22,7 +22,7 @@ const AccordionItem = ({ title, children, isOpen, onClick }) => {
                 </svg>
             </button>
             <div
-                className={`bg-white px-4  transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-screen py-2' : 'max-h-0'
+                className={`bg-white px-4  transition-all duration-200 overflow-hidden ${isOpen ? 'max-h-screen py-2' : 'max-h-0'
                     }`}
             >
                 {children}
@@ -40,7 +40,7 @@ const Accordion2 = () => {
     };
 
     return (
-        <div className="max-w-lg mx-auto">
+        <div className="max-w-lg mx-auto md:mt-20">
             <AccordionItem
                 title="Accordion Item 1"
                 isOpen={openIndex === 0}

@@ -51,14 +51,7 @@
     background: linear-gradient(to bottom right, #cad3e8 30%, rgb(226, 220, 233) 70%);
 }
 
-.navDropdown1:hover .absolute {
-    opacity: 100;
-    transform: scaleY(1);
-}
 
-.dropdownPopup {
-    right: -40px;
-}
 
 html {
     scroll-behavior: smooth;
@@ -102,6 +95,18 @@ body {
 
 
 
+/* navbar popups */
+.navDropdown1:hover .absolute {
+    opacity: 100;
+    transform: scaleY(1);
+    border: 1px solid rgb(224, 224, 224);
+}
+
+.dropdownPopup {
+    right: -40px;
+}
+
+/* navbar popups */
 
 .socialIcons svg {
     transition: transform 0.1s ease-in-out;
@@ -179,7 +184,7 @@ body {
 
 /* notifications */
 
-
+/* ribbon */
 .ribbon {
     position: absolute;
     left: -5px;
@@ -262,3 +267,7 @@ textarea {
 }
 
 /* DateTime picker */
+
+#filter select {
+    padding-right: 30px;
+}

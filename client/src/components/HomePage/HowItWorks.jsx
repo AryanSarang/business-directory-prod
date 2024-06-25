@@ -1,4 +1,4 @@
-import Accordion from "./Accordion";
+
 import ProcessImage from '../../assets/process.png';
 import Accordion2 from "./Accordion2";
 

@@ -1,5 +1,5 @@
 import { RiMenuUnfold4Line2 } from "react-icons/ri";
-import { FaFire, FaBuilding, FaUser, FaBell, FaNewspaper, FaAddressCard, FaChartBar, FaUserTie, FaLayerGroup, FaStar, FaHome, FaHandshake } from 'react-icons/fa';
+import { FaUser, FaBell, FaAddressCard, FaUserTie, FaLayerGroup, FaHome } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import DrawerLogo from '../assets/drawerLogo.png';
@@ -133,7 +133,7 @@ const Drawer = () => {
                         <li>
                             <button type="button" className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-slate-700 hover:text-white" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
 
-                                <FaLayerGroup className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
+                                <FaLayerGroup className="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" />
                                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Categories</span>
                                 <svg className="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
